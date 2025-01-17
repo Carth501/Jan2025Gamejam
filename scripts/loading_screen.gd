@@ -10,9 +10,10 @@ var starting_animation_name:String
 
 func _ready() -> void:
 	progress_bar.visible = false
+	pass
 
+# called by SceneManager to start the "in" transition.
 func start_transition(animation_name:String) -> void:
-	
 	if !anim_player.has_animation(animation_name):
 		push_warning("'%s' animation does not exist" % animation_name)
 		animation_name = "fade_to_black"
@@ -37,3 +38,12 @@ func finish_transition() -> void:
 	# once this final animation plays, we can free this scene
 	await anim_player.animation_finished
 	queue_free()
+
+func report_midpoint() -> void:
+	transition_in_complete.emit()
+
+func _on_timer_timeout() -> void:
+	progress_bar.visible = true
+
+func update_bar(val:float) -> void:
+	progress_bar.value = val

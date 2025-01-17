@@ -1,4 +1,4 @@
-extends CollisionShape2D
+class_name Door extends Area2D
 
 signal player_entered_door(door:Door,transition_type:String)
 
@@ -21,10 +21,26 @@ func _on_body_entered(body: Node2D) -> void:
 
 # returns the starting location of the player based on this door's location and the
 # entry_direction (the Vector towards the room)
-func get_player_entry_vector() - Vector2:
-	pass
+func get_player_entry_vector() -> Vector2:
+	var vector:Vector2 = Vector2.LEFT
+	match entry_direction:
+		0:
+			vector = Vector2.UP
+		1:
+			vector = Vector2.RIGHT
+		2:
+			vector = Vector2.DOWN
+	return (vector * push_distance) + self.position
 
 # inverts entry direction to determine the direction player would have been moving
 # when they entered the room
 func get_move_dir() -> Vector2:
-	pass
+	var dir:Vector2 = Vector2.RIGHT
+	match entry_direction:
+		0:
+			dir = Vector2.DOWN
+		1:
+			dir = Vector2.LEFT
+		2:
+			dir = Vector2.UP
+	return dir
