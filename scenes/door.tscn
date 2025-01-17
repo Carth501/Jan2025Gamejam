@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxdbpa8w8wvgv"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_1yn5m"]
+
+[node name="Door" type="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+script = ExtResource("1_1yn5m")
