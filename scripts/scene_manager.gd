@@ -1,7 +1,7 @@
 class_name SceneManager extends Node
 
-const LEVEL_H:int = 144
-const LEVEL_W:int = 240
+const LEVEL_H:int = 648
+const LEVEL_W:int = 1152
 
 signal content_finished_loading(content)
 signal zelda_content_finished_loading(content)
