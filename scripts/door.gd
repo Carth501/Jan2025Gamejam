@@ -5,8 +5,10 @@ signal player_entered_door(door:Door,transition_type:String)
 @export_enum("north","east","south","west") var entry_direction
 @export_enum("fade_to_black","wipe_to_right","zelda") var transition_type:String
 @export var push_distance:int = 16
-@export var path_to_new_scene:String
+@export var new_scene:PackedScene
 @export var entry_door_name:String
+
+@onready var path_to_new_scene = new_scene.resource_path
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body is Player:

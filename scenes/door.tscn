@@ -11,6 +11,7 @@ path_to_new_scene = null
 entry_door_name = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_1h575")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
