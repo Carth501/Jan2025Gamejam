@@ -15,38 +15,39 @@ var _content_path:String
 var _load_progress_timer:Timer
 
 func _ready() -> void:
+	_load_progress_timer = Timer.new()
+	add_child(_load_progress_timer)
+	_load_progress_timer.timeout.connect(monitor_load_status)
 	content_invalid.connect(on_content_invalid)
 	content_failed_to_load.connect(on_content_failed_to_load)
 	content_finished_loading.connect(on_content_finished_loading)
 	zelda_content_finished_loading.connect(on_zelda_content_finished_loading)
 
-func load_new_scene(content_path:String, transition_type:String="fade_to_black") -> void:
+func load_new_scene(level_id:String, transition_type:String="fade_to_black") -> void:
 	_transition = transition_type
 	# add loading screen
 	loading_screen = _loading_screen_scene.instantiate() as LoadingScreen
 	get_tree().root.add_child(loading_screen)
 	loading_screen.start_transition(transition_type)
-	_load_content(content_path)
+	_load_content(level_id)
 
-func load_level_zelda(content_path:String) -> void:
+func load_level_zelda(level_id:String) -> void:
 	_transition = "zelda"
-	_load_content(content_path)
+	_load_content(level_id)
 
-func _load_content(content_path:String) -> void:
+func _load_content(level_id:String) -> void:
+	_content_path = dereference(level_id)
+	 
 	# zelda transition doesn't use a loading screen
 	if loading_screen != null:
 		await loading_screen.transition_in_complete
-	
-	_content_path = content_path
-	var loader = ResourceLoader.load_threaded_request(content_path)
-	if not ResourceLoader.exists(content_path) or loader == null:
-		content_invalid.emit(content_path)
+
+	var loader = ResourceLoader.load_threaded_request(_content_path)
+	if not ResourceLoader.exists(_content_path) or loader == null:
+		content_invalid.emit(_content_path)
 		return
 	
-	_load_progress_timer.Timer.new()
 	_load_progress_timer.wait_time = 0.1
-	_load_progress_timer.timeout.connect(monitor_load_status)
-	get_tree().root.add_child(_load_progress_timer)
 	_load_progress_timer.start()
 
 func monitor_load_status() -> void:
@@ -67,7 +68,6 @@ func monitor_load_status() -> void:
 			return
 		ResourceLoader.THREAD_LOAD_LOADED:
 			_load_progress_timer.stop()
-			_load_progress_timer.queue_free()
 			if _transition == "zelda":
 				zelda_content_finished_loading.emit(ResourceLoader.load_threaded_get(_content_path).instantiate())
 			else:
@@ -100,7 +100,7 @@ func on_content_finished_loading(content) -> void:
 	
 	# probably not necssary since we split out content_finished_loading but it won't hurt to have an extra check
 	if loading_screen != null:
-		loading_screen.finished_transition()
+		loading_screen.finish_transition()
 		# e.g. will be skipped if we're loading a menu instead of a game level
 		if content is Level:
 			content.init_player_location()
@@ -150,3 +150,9 @@ func on_zelda_content_finished_loading(content) -> void:
 	outgoing_scene.queue_free()
 	# Add and set the new scene to current
 	get_tree().current_scene = content
+
+func dereference(level_id: String):
+	if(IdTablesSingle.levels.has(level_id)):
+		return IdTablesSingle.levels[level_id].path
+	else:
+		push_error(str("invalid level_id ", level_id))
