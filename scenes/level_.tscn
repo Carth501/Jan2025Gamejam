@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci4c8vmw8ks5m"]
+[gd_scene load_steps=2 format=3 uid="uid://ci4c8vmw8ks5m"]
 
-[ext_resource type="Script" path="res://scripts/level_.gd" id="1_gu77i"]
-[ext_resource type="PackedScene" uid="uid://d2fy5lf4ox14q" path="res://scenes/player.tscn" id="2_r1ak5"]
-[ext_resource type="PackedScene" uid="uid://dxdbpa8w8wvgv" path="res://scenes/door.tscn" id="2_t2wca"]
+[ext_resource type="PackedScene" uid="uid://y7jertm1cysn" path="res://scenes/player.tscn" id="1_p7jng"]
 
 [node name="Level_" type="Node2D"]
-script = ExtResource("1_gu77i")
 
-[node name="Door" parent="." instance=ExtResource("2_t2wca")]
+[node name="Player" parent="." instance=ExtResource("1_p7jng")]
+position = Vector2(593, 263)
 
-[node name="Player" parent="." instance=ExtResource("2_r1ak5")]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(563, 330)
