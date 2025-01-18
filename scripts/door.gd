@@ -3,7 +3,7 @@ class_name Door extends Area2D
 signal player_entered_door(door:Door,transition_type:String)
 
 @export_enum("north","east","south","west") var entry_direction
-@export_enum("fade_to_black","wipe_to_right","zelda") var transition_type:String
+@export_enum("fade_to_black","fade_to_white","wipe_to_left","wipe_to_right","zelda") var transition_type:String
 @export var push_distance:int = 16
 @export var destination_id:String
 @export var entry_door_name:String

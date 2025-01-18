@@ -3,4 +3,5 @@
 [ext_resource type="TileSet" uid="uid://iq4biqkhxetr" path="res://tilesets/game_tile_set.tres" id="1_vg5s1"]
 
 [node name="Terrain" type="TileMapLayer"]
+z_index = -1
 tile_set = ExtResource("1_vg5s1")
