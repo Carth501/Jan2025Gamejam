@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=4 uid="uid://ci4c8vmw8ks5m"]
+[gd_scene load_steps=5 format=4 uid="uid://ci4c8vmw8ks5m"]
 
+[ext_resource type="Script" path="res://scripts/level_.gd" id="1_giynp"]
 [ext_resource type="PackedScene" uid="uid://y7jertm1cysn" path="res://scenes/player.tscn" id="1_p7jng"]
 [ext_resource type="PackedScene" uid="uid://dxdbpa8w8wvgv" path="res://scenes/door.tscn" id="2_t2wca"]
 [ext_resource type="PackedScene" uid="uid://hijcaxy5t0yd" path="res://scenes/terrain.tscn" id="3_cxctq"]
 
-[node name="Level_" type="Node2D"]
+[node name="Level_" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_giynp")
+player = NodePath("Player")
+doors = [NodePath("WestDoor"), NodePath("EastDoor")]
 
 [node name="Player" parent="." instance=ExtResource("1_p7jng")]
 position = Vector2(481, 272)
