@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://y7jertm1cysn"]
+[gd_scene load_steps=39 format=3 uid="uid://y7jertm1cysn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdhu5"]
 [ext_resource type="Script" path="res://resources/stats.gd" id="2_bwugf"]
 [ext_resource type="Texture2D" uid="uid://bvnyjx71xvte1" path="res://assets/Player/placeholder.png" id="2_nmue7"]
+[ext_resource type="PackedScene" uid="uid://dukpldyxg3v66" path="res://scenes/weapons/claws.tscn" id="4_vyxao"]
 
 [sub_resource type="Resource" id="Resource_seq5a"]
 script = ExtResource("2_bwugf")
@@ -288,3 +289,8 @@ offset_right = 32.0
 offset_bottom = -48.0
 value = 67.0
 show_percentage = false
+
+[node name="Claws" parent="." instance=ExtResource("4_vyxao")]
+position = Vector2(62, 0)
+collision_layer = 3
+collision_mask = 3
