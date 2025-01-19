@@ -264,16 +264,27 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8daa"]
 radius = 26.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthbar")]
 collision_layer = 3
+platform_on_leave = 2
+platform_floor_layers = 4294967040
 script = ExtResource("1_rdhu5")
 stats = SubResource("Resource_seq5a")
+healthbar = NodePath("HealthBar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_m7ph5")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_h8daa")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 32.0
+offset_bottom = -48.0
+value = 67.0
+show_percentage = false
