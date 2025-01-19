@@ -36,3 +36,6 @@ func _process(delta: float) -> void:
 
 func detect_contact():
 	return 
+
+func get_stats():
+	return stats
