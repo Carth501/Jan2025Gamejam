@@ -1,3 +1,3 @@
-class_name Enemy extends CharacterBody2D
+class_name Enemy extends RigidBody2D
 
 @export var stats:Stats
