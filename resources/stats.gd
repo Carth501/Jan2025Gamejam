@@ -5,8 +5,10 @@ class_name Stats extends Resource
 @export var entity_name: String = ""
 
 @export_group("Attributes")
-@export var health: float = 40.0
-@export var mana: float = 10.0
+@export var max_health: float = 40.0
+@export var current_health: float = 40.0
+@export var max_mana: float = 10.0
+@export var current_mana: float = 10.0
 @export var attack: int = 5
 @export var defense: int = 1
 
@@ -17,6 +19,7 @@ class_name Stats extends Resource
 
 #	//STAT FUNCTIONS//
 func takeDamage(amount) -> void:
-	health -= amount
+	print(amount)
+	current_health -= amount
 
 #	//MISC FUNCTIONS//

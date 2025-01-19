@@ -55,6 +55,9 @@ func _disconnect_from_doors() -> void:
 			door.player_entered_door.disconnect(_on_player_entered_door)
 
 func spawn_enemy() -> void:
-	print("spawn_enemy")
+	if(enemies.size() > 20 ):
+		return
 	var new_enemy = enemy_prefab.instantiate()
 	add_child(new_enemy)
+	new_enemy.set_player(player)
+	enemies.append(new_enemy)

@@ -1,7 +1,20 @@
-[gd_scene load_steps=36 format=3 uid="uid://y7jertm1cysn"]
+[gd_scene load_steps=38 format=3 uid="uid://y7jertm1cysn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdhu5"]
+[ext_resource type="Script" path="res://resources/stats.gd" id="2_bwugf"]
 [ext_resource type="Texture2D" uid="uid://bvnyjx71xvte1" path="res://assets/Player/placeholder.png" id="2_nmue7"]
+
+[sub_resource type="Resource" id="Resource_seq5a"]
+script = ExtResource("2_bwugf")
+type = null
+entity_name = ""
+max_health = 40.0
+current_health = 40.0
+max_mana = 10.0
+current_mana = 10.0
+attack = 5
+defense = 1
+resource_dropped = Array[String]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udy71"]
 atlas = ExtResource("2_nmue7")
@@ -251,14 +264,27 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8daa"]
 radius = 26.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthbar")]
+collision_layer = 3
+platform_on_leave = 2
+platform_floor_layers = 4294967040
 script = ExtResource("1_rdhu5")
+stats = SubResource("Resource_seq5a")
+healthbar = NodePath("HealthBar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_m7ph5")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_h8daa")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 32.0
+offset_bottom = -48.0
+value = 67.0
+show_percentage = false
