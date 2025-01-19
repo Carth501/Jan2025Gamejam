@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 @export var stats: Stats
-@export var SPEED:= 200.0
+@export var SPEED:= 100.0
 @export var DAMAGE:= 2.0
 var player: Player
 @export var attack_ready:= true
@@ -22,14 +22,17 @@ func ready_to_attack():
 	attack_ready = true
 
 func _process(delta: float) -> void:
-	move_and_slide()
 	if(player != null):
 		var vector_to = player.position - position
-		if(vector_to.length() < 80 && attack_ready):
-			velocity = Vector2.ZERO
-			player.stats.takeDamage(DAMAGE)
-			attack_ready = false
-			cooldown_timer.start()
-		else:
-			velocity = vector_to.normalized() * SPEED
-	
+		velocity = vector_to.normalized() * SPEED
+		move_and_slide()
+		if(attack_ready):
+			for i in get_slide_collision_count():
+				var collision = get_slide_collision(i)
+				if(collision.get_collider() == player):
+					player.stats.takeDamage(DAMAGE)
+					attack_ready = false
+					cooldown_timer.start()
+
+func detect_contact():
+	return 
