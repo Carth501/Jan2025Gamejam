@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@export var stats: Stats
 @export var speed = 400
 
 func get_input():
