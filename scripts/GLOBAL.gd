@@ -64,12 +64,19 @@ func reset_data() -> void:
 #	//--DEBUG FUNCTIONS--//
 func debug(level:int,text:String) -> void:
 	if DEBUG and level >= DEBUG_LEVEL:
+		var stack_info = get_stack()[1]
+		var script_name = stack_info.get("source", "Unknown")
+		script_name = script_name.replace("res://scripts/","")
+		var line_number = stack_info.line
+		
+		var debug_message = "[%s:%d] %s" % [script_name, line_number, text]
+		
 		match level:
 			INFO:
-				print("[INFO] " + text)
+				print("[INFO] " + debug_message)
 			WARNING:
-				print("[WARNING] " + text)
+				print("[WARNING] " + debug_message)
 			ERROR:
-				print("[ERROR] " + text)
+				print("[ERROR] " + debug_message)
 			_:
-				print("[UNKNOWN LEVEL] " + text)
+				print("[UNKNOWN LEVEL] " + debug_message)
