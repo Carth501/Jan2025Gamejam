@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bofvqi5ee27yi"]
+
+[ext_resource type="Script" path="res://scripts/items/blood_drop.gd" id="1_5lu4h"]
+[ext_resource type="Texture2D" uid="uid://f3vlp78fm6kn" path="res://assets/items/blood_drop.png" id="1_56quq"]
+[ext_resource type="Script" path="res://scripts/items/wiggle.gd" id="2_302s3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6qee"]
+radius = 16.0
+
+[node name="BloodDrop" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_5lu4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a6qee")
+
+[node name="BloodDrop" type="Sprite2D" parent="."]
+texture = ExtResource("1_56quq")
+script = ExtResource("2_302s3")

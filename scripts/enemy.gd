@@ -14,6 +14,7 @@ signal no_health
 @export_group("Misc")
 @export_subgroup("Drops")
 @export_enum("Coins","Food","Blood","Pocket Lint") var resource_dropped: Array[String] = []
+@onready var blood_drop_preload = preload("res://scenes/items/blood_drop.tscn")
 
 var player: Player
 var attack_ready:= true
@@ -51,6 +52,11 @@ func detect_contact():
 	return 
 
 func die():
+	if(randf() > 0.1):
+		var new_drop = blood_drop_preload.instantiate()
+		get_tree().root.add_child(new_drop)
+		new_drop.position = position
+		get_tree().root.move_child(new_drop, 1)
 	queue_free()
 
 func takeDamage(amount) -> void:

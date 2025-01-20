@@ -5,6 +5,7 @@ class_name Player extends CharacterBody2D
 @export var healthbar:= ProgressBar
 @export var weapon: Node
 @export var pivot: Node2D 
+var inventory:= {}
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -18,3 +19,10 @@ func _physics_process(delta):
 
 func _process(delta: float) -> void:
 	healthbar.value = stats.current_health/stats.max_health*100.0
+
+func pickup_item(object):
+	if(object.has_method("get_item_id")):
+		var item_quantity = inventory.get_or_add(object.get_item_id(), 0)
+		item_quantity += object.get_quantity()
+		inventory[object.get_item_id()] = item_quantity
+	object.queue_free()

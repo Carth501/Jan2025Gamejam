@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://y7jertm1cysn"]
+[gd_scene load_steps=41 format=3 uid="uid://y7jertm1cysn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdhu5"]
 [ext_resource type="Script" path="res://resources/stats.gd" id="2_bwugf"]
@@ -266,6 +266,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8daa"]
 radius = 26.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3uni"]
+radius = 75.0
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthbar", "weapon", "pivot")]
 collision_layer = 3
 platform_on_leave = 2
@@ -307,3 +310,12 @@ offset_right = 112.0
 offset_bottom = 111.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_ondsp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_w3uni")
+
+[connection signal="area_entered" from="Area2D" to="." method="pickup_item"]

@@ -12,6 +12,7 @@ collision_mask = 2
 platform_on_leave = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_koiv0")
+resource_dropped = Array[String](["Blood"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rlutu")
