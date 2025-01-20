@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://n73lsv3tpb7c"]
+
+[ext_resource type="FontFile" uid="uid://b7egv21l5xsv0" path="res://assets/fonts/PixelOperator8.ttf" id="1_ekyg5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vqqpp"]
+
+[node name="Options_Display_Button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 120
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ekyg5")
+theme_override_font_sizes/font_size = 32
+text = "BASE_LABEL"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_vqqpp")
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2

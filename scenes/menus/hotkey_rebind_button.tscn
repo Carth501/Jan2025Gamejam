@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmkujr7q1lynm"]
+
+[ext_resource type="Script" path="res://scripts/menus/hotkey_rebind_button.gd" id="1_7kosa"]
+[ext_resource type="FontFile" uid="uid://b7egv21l5xsv0" path="res://assets/fonts/PixelOperator8.ttf" id="2_ep7pv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x0c4l"]
+
+[node name="Hotkey_Rebind_Button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7kosa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 21.0
+offset_bottom = 11.5
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ep7pv")
+theme_override_font_sizes/font_size = 32
+text = "ACTION"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="HBoxContainer" groups=["hotkey_button"]]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ep7pv")
+theme_override_font_sizes/font_size = 24
+toggle_mode = true
+text = "ACTION_KEY"
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_x0c4l")
+
+[node name="Button2" type="Button" parent="HBoxContainer" groups=["hotkey_button"]]
+visible = false
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ep7pv")
+theme_override_font_sizes/font_size = 24
+toggle_mode = true
+text = "ACTION_KEY"
+
+[connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Button2" to="." method="_on_button_2_toggled"]

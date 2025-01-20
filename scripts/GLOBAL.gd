@@ -3,10 +3,18 @@ extends Node
 const PLAYER = preload("res://scenes/player.tscn")
 const PATH = "user://save.txt"
 
+#	//--DEBUG--//
+const DEBUG: bool = true
+const DEBUG_LEVEL: int = 0
+const INFO: int = 0
+const WARNING: int = 1
+const ERROR: int = 2
+
+#	//--GAME VARIABLES--//
 var game_started: bool
 var player_alive: bool
 
-# // PLAYER STATS //
+#	//--PLAYER STATS--//
 var essence:float # health
 var aether:float # mana 
 
@@ -16,16 +24,16 @@ var corporeal_fortitude:int # vitality
 var arcane_knowledge:int # intelligence
 var dread_will:int # willpower
 
-# // POWERS & SPELLS //
+#	//--POWERS & SPELLS--//
 var phylactery_bond:float # stat tied to how much damage the player can transfer to or absorb from the phylactery
 var dark_influence:float # 
 
-# // WORLD STATS
+#	//--WORLD STATS--//
 var room_counter:int
 var game_time:float
 
 
-# // SAVE FUNCTIONALITY //
+#	//--SAVE FUNCTIONALITY--//
 var data: Dictionary = {
 	"version": "0.0.1",
 	"master": 100.0,
@@ -52,3 +60,23 @@ func reset_data() -> void:
 	data = default_data
 	save_data()
 	get_tree().reload_current_scene()
+
+#	//--DEBUG FUNCTIONS--//
+func debug(level:int,text:String) -> void:
+	if DEBUG and level >= DEBUG_LEVEL:
+		var stack_info = get_stack()[1]
+		var script_name = stack_info.get("source", "Unknown")
+		script_name = script_name.replace("res://scripts/","")
+		var line_number = stack_info.line
+		
+		var debug_message = "[%s:%d] %s" % [script_name, line_number, text]
+		
+		match level:
+			INFO:
+				print("[INFO] " + debug_message)
+			WARNING:
+				print("[WARNING] " + debug_message)
+			ERROR:
+				print("[ERROR] " + debug_message)
+			_:
+				print("[UNKNOWN LEVEL] " + debug_message)
