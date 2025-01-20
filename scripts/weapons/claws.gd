@@ -15,5 +15,5 @@ func _ready() -> void:
 
 func attack():
 	for node in get_overlapping_bodies():
-		if(node.has_method("get_stats")):
-			node.get_stats().takeDamage(damage)
+		if(node.has_method("takeDamage")):
+			node.takeDamage(damage)
