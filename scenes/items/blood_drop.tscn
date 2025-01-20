@@ -7,10 +7,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6qee"]
 radius = 16.0
 
-[node name="BloodDrop" type="Area2D"]
+[node name="BloodDrop" type="Area2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_5lu4h")
+sprite = NodePath("BloodDrop")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a6qee")

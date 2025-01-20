@@ -25,4 +25,13 @@ func pickup_item(object):
 		var item_quantity = inventory.get_or_add(object.get_item_id(), 0)
 		item_quantity += object.get_quantity()
 		inventory[object.get_item_id()] = item_quantity
-	object.queue_free()
+		var item_sprite = object.get_sprite()
+		var old_transform = item_sprite.global_transform
+		object.remove_child(item_sprite)
+		add_child(item_sprite)
+		object.queue_free()
+		item_sprite.global_transform = old_transform
+		var tween = get_tree().create_tween().set_parallel(true)
+		tween.tween_property(item_sprite, "scale", Vector2(0, 0), 1)
+		tween.tween_property(item_sprite, "position", Vector2(0, 0), 1)
+		tween.finished.connect(item_sprite.queue_free)
