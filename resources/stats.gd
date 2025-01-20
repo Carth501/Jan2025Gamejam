@@ -14,12 +14,15 @@ class_name Stats extends Resource
 
 @export_group("Misc")
 @export_subgroup("Drops")
-@export_enum("Coines","Food","Blood","Pocket Lint") var resource_dropped: Array[String] = []
+@export_enum("Coins","Food","Blood","Pocket Lint") var resource_dropped: Array[String] = []
 
+signal no_health
 
 #	//STAT FUNCTIONS//
 func takeDamage(amount) -> void:
 	print(amount)
 	current_health -= amount
+	if(current_health < 0):
+		no_health.emit()
 
 #	//MISC FUNCTIONS//
