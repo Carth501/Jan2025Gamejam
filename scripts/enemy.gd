@@ -12,6 +12,10 @@ signal dead(enemy_ref)
 @export var attack: int = 5
 @export var defense: int = 1
 @export var speed:= 100.0
+@export var kb_coeff:= 1.0
+@export var kb_duration:= 0.25
+var current_kb:= Vector2.ZERO
+@export var kb_timer: Timer
 
 @export_group("Misc")
 @export_subgroup("Drops")
@@ -39,6 +43,10 @@ func ready_to_attack():
 
 func _process(delta: float) -> void:
 	if(!active):
+		return
+	if(current_kb != Vector2.ZERO):
+		velocity = current_kb * kb_coeff * 4
+		move_and_slide()
 		return
 	if(player != null):
 		var vector_to = player.position - position
@@ -71,6 +79,18 @@ func takeDamage(amount) -> void:
 	current_health -= amount
 	if(current_health < 0):
 		no_health.emit()
+
+func apply_knockback(vector: Vector2, bonus_duration: float):
+	if(current_kb!= Vector2.ZERO):
+		kb_timer.wait_time += kb_duration + bonus_duration
+		current_kb += current_kb
+		return
+	current_kb = vector
+	kb_timer.wait_time = kb_duration + bonus_duration
+	kb_timer.start()
+
+func end_knockback():
+	current_kb = Vector2.ZERO
 
 func activate():
 	active = true
