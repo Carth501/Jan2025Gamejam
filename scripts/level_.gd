@@ -80,7 +80,6 @@ func calculate_enemies_to_be_created() -> int:
 	var current_count = active_enemies.size()
 	var target_count = calculate_current_max_enemies()
 	var difference = ceili(( target_count - current_count ) / 4)
-	print(str("difference", difference))
 	return difference
 
 func deactivate(enemy: Enemy):
