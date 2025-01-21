@@ -1,9 +1,12 @@
 class_name Level extends Node2D
 
 @export var player:Player
-var enemies: Array[Enemy]
+var active_enemies: Array[Enemy]
+var inactive_enemies: Array[Enemy]
 @onready var enemy_prefab = preload("res://scenes/enemy.tscn")
 @export var doors:Array[Door]
+var seconds := 0
+@export var level_extent: Vector2
 
 var data:LevelDataHandoff
 
@@ -11,12 +14,6 @@ func _ready() -> void:
 	# if we aren't transition between levels, we don't need to wait for the SceneManager to call this
 	if data == null:
 		enter_level()
-	var timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = 1.0
-	timer.one_shot = false
-	timer.timeout.connect(spawn_enemy)
-	timer.start()
 
 func enter_level() -> void:
 	if data != null:
@@ -54,10 +51,51 @@ func _disconnect_from_doors() -> void:
 		if door.player_entered_door.is_connected(_on_player_entered_door):
 			door.player_entered_door.disconnect(_on_player_entered_door)
 
-func spawn_enemy() -> void:
-	if(enemies.size() > 20 ):
-		return
-	var new_enemy = enemy_prefab.instantiate()
-	add_child(new_enemy)
-	new_enemy.set_player(player)
-	enemies.append(new_enemy)
+func spawn_enemies() -> void:
+	var count_to_be_created = calculate_enemies_to_be_created()
+	for r in count_to_be_created:
+		spawn_single_enemy()
+
+func spawn_single_enemy():
+	var new_enemy
+	if(inactive_enemies.size() > 0):
+		new_enemy = inactive_enemies[0]
+		inactive_enemies.remove_at(0)
+	else:
+		new_enemy = enemy_prefab.instantiate()
+		new_enemy.dead.connect(deactivate)
+		add_child(new_enemy)
+		new_enemy.set_player(player)
+	active_enemies.append(new_enemy)
+	new_enemy.position = get_random_spawn_point()
+	new_enemy.activate()
+
+func increment():
+	seconds += 1
+
+func calculate_current_max_enemies() -> int:
+	return (seconds / 3.0) + 20
+
+func calculate_enemies_to_be_created() -> int:
+	var current_count = active_enemies.size()
+	var target_count = calculate_current_max_enemies()
+	var difference = ceili(( target_count - current_count ) / 4)
+	return difference
+
+func deactivate(enemy: Enemy):
+	active_enemies.erase(enemy)
+	inactive_enemies.append(enemy)
+	enemy.position = get_random_spawn_point()
+
+func get_random_spawn_point() -> Vector2:
+	var edge_index = randi()% 4
+	if(edge_index == 0):
+		return Vector2(level_extent.x * randf(), 0)
+	elif(edge_index == 1):
+		return Vector2(0, level_extent.y * randf())
+	elif(edge_index == 2):
+		return Vector2(level_extent.x * randf(), level_extent.y)
+	elif(edge_index == 3):
+		return Vector2(level_extent.x, level_extent.y * randf())
+	else:
+		return Vector2.ZERO
