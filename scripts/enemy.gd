@@ -1,8 +1,10 @@
 class_name Enemy extends CharacterBody2D
 
 signal no_health
+signal dead(enemy_ref)
 
 @export_category("Statistics")
+@export var active:= true
 @export var max_health: float = 40.0
 @export var current_health: float = 40.0
 @export var max_mana: float = 10.0
@@ -36,6 +38,8 @@ func ready_to_attack():
 	attack_ready = true
 
 func _process(delta: float) -> void:
+	if(!active):
+		return
 	if(player != null):
 		var vector_to = player.position - position
 		velocity = vector_to.normalized() * speed
@@ -57,9 +61,17 @@ func die():
 		get_tree().root.add_child(new_drop)
 		new_drop.position = position
 		get_tree().root.move_child(new_drop, 1)
-	queue_free()
+	dead.emit(self)
+	active = false
+	visible = false
 
 func takeDamage(amount) -> void:
+	if(!active):
+		return
 	current_health -= amount
 	if(current_health < 0):
 		no_health.emit()
+
+func activate():
+	active = true
+	visible = true
