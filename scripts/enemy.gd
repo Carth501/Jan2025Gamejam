@@ -72,6 +72,8 @@ func die():
 	dead.emit(self)
 	active = false
 	visible = false
+	current_kb = Vector2.ZERO
+	kb_timer.stop()
 
 func takeDamage(amount) -> void:
 	if(!active):
