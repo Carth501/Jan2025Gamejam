@@ -10,9 +10,9 @@ signal dead(enemy_ref)
 @export var max_mana: float = 10.0
 @export var current_mana: float = 10.0
 @export var attack: int = 5
-@export var range: float = 1.0
+@export var range: float = 50.0
 @export var defense: int = 1
-@export var speed:= 100.0
+@export var speed:= 60.0
 @export var kb_coeff:= 1.0
 @export var kb_duration:= 0.25
 var knocked_back:= false
