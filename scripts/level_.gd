@@ -63,11 +63,11 @@ func spawn_single_enemy():
 		inactive_enemies.remove_at(0)
 	else:
 		new_enemy = enemy_prefab.instantiate()
+		new_enemy.position = get_random_spawn_point()
 		new_enemy.dead.connect(deactivate)
 		add_child(new_enemy)
 		new_enemy.set_player(player)
 	active_enemies.append(new_enemy)
-	new_enemy.position = get_random_spawn_point()
 	new_enemy.activate()
 
 func increment():
@@ -85,7 +85,7 @@ func calculate_enemies_to_be_created() -> int:
 func deactivate(enemy: Enemy):
 	active_enemies.erase(enemy)
 	inactive_enemies.append(enemy)
-	enemy.position = get_random_spawn_point()
+	enemy.teleport(get_random_spawn_point())
 
 func get_random_spawn_point() -> Vector2:
 	var edge_index = randi()% 4

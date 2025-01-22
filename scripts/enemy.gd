@@ -1,4 +1,4 @@
-class_name Enemy extends CharacterBody2D
+class_name Enemy extends RigidBody2D
 
 signal no_health
 signal dead(enemy_ref)
@@ -10,11 +10,12 @@ signal dead(enemy_ref)
 @export var max_mana: float = 10.0
 @export var current_mana: float = 10.0
 @export var attack: int = 5
+@export var range: float = 50.0
 @export var defense: int = 1
-@export var speed:= 100.0
+@export var speed:= 60.0
 @export var kb_coeff:= 1.0
 @export var kb_duration:= 0.25
-var current_kb:= Vector2.ZERO
+var knocked_back:= false
 @export var kb_timer: Timer
 
 @export_group("Misc")
@@ -44,26 +45,25 @@ func ready_to_attack():
 func _process(delta: float) -> void:
 	if(!active):
 		return
-	if(current_kb != Vector2.ZERO):
-		velocity = current_kb * kb_coeff * 4
-		move_and_slide()
-		return
 	if(player != null):
 		var vector_to = player.position - position
-		velocity = vector_to.normalized() * speed
-		move_and_slide()
-		if(attack_ready):
-			for i in get_slide_collision_count():
-				var collision = get_slide_collision(i)
-				if(collision.get_collider() == player):
-					player.stats.takeDamage(attack)
-					attack_ready = false
-					cooldown_timer.start()
+		var desired_velocity = vector_to.normalized() * speed
+		var velocity_dif = desired_velocity - linear_velocity
+		if(!knocked_back):
+			apply_central_force(velocity_dif * 1000 * delta)
+		else:
+			apply_central_force(velocity_dif * 100 * delta)
+		if(attack_ready && (vector_to.length() < range)):
+			player.stats.takeDamage(attack)
+			attack_ready = false
+			cooldown_timer.start()
 
 func detect_contact():
 	return 
 
 func die():
+	visible = false
+	set_linear_velocity(Vector2.ZERO)
 	if(randf() > 0.1):
 		var new_drop = blood_drop_preload.instantiate()
 		get_tree().root.add_child(new_drop)
@@ -71,8 +71,8 @@ func die():
 		get_tree().root.move_child(new_drop, 1)
 	dead.emit(self)
 	active = false
-	visible = false
-	current_kb = Vector2.ZERO
+	sleeping = true
+	knocked_back = false
 	kb_timer.stop()
 
 func takeDamage(amount) -> void:
@@ -83,17 +83,25 @@ func takeDamage(amount) -> void:
 		no_health.emit()
 
 func apply_knockback(vector: Vector2, bonus_duration: float):
-	if(current_kb!= Vector2.ZERO):
-		kb_timer.wait_time += kb_duration + bonus_duration
-		current_kb += current_kb
+	if(!active):
 		return
-	current_kb = vector
+	knocked_back = true
+	apply_central_impulse(vector * 5 * kb_coeff)
 	kb_timer.wait_time = kb_duration + bonus_duration
 	kb_timer.start()
 
 func end_knockback():
-	current_kb = Vector2.ZERO
+	knocked_back = false
 
 func activate():
 	active = true
 	visible = true
+	sleeping = false
+
+func teleport(destination: Vector2):
+	PhysicsServer2D.body_set_state(
+		get_rid(),
+		PhysicsServer2D.BODY_STATE_TRANSFORM,
+		Transform2D.IDENTITY.translated(destination)
+	)
+	set_linear_velocity(Vector2.ZERO)

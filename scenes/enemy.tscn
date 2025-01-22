@@ -6,11 +6,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_rlutu"]
 radius = 20.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("kb_timer")]
+[node name="Enemy" type="RigidBody2D" node_paths=PackedStringArray("kb_timer")]
 collision_layer = 2
 collision_mask = 2
-platform_on_leave = 2
-platform_floor_layers = 4294901760
+gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_koiv0")
 kb_timer = NodePath("KBTimer")
 resource_dropped = Array[String](["Blood"])
