@@ -15,7 +15,7 @@ signal dead(enemy_ref)
 @export var speed:= 100.0
 @export var kb_coeff:= 1.0
 @export var kb_duration:= 0.25
-var current_kb:= Vector2.ZERO
+var knocked_back:= false
 @export var kb_timer: Timer
 
 @export_group("Misc")
@@ -45,16 +45,15 @@ func ready_to_attack():
 func _process(delta: float) -> void:
 	if(!active):
 		return
-	if(current_kb != Vector2.ZERO):
-		#velocity = current_kb * kb_coeff * 4
-		return
 	if(player != null):
 		var vector_to = player.position - position
 		var desired_velocity = vector_to.normalized() * speed
 		var velocity_dif = desired_velocity - linear_velocity
-		apply_central_force(velocity_dif * 1000 * delta)
+		if(!knocked_back):
+			apply_central_force(velocity_dif * 1000 * delta)
+		else:
+			apply_central_force(velocity_dif * 100 * delta)
 		if(attack_ready && (vector_to.length() < range)):
-			print("in range")
 			player.stats.takeDamage(attack)
 			attack_ready = false
 			cooldown_timer.start()
@@ -64,6 +63,7 @@ func detect_contact():
 
 func die():
 	visible = false
+	set_linear_velocity(Vector2.ZERO)
 	if(randf() > 0.1):
 		var new_drop = blood_drop_preload.instantiate()
 		get_tree().root.add_child(new_drop)
@@ -72,7 +72,7 @@ func die():
 	dead.emit(self)
 	active = false
 	sleeping = true
-	current_kb = Vector2.ZERO
+	knocked_back = false
 	kb_timer.stop()
 
 func takeDamage(amount) -> void:
@@ -83,16 +83,15 @@ func takeDamage(amount) -> void:
 		no_health.emit()
 
 func apply_knockback(vector: Vector2, bonus_duration: float):
-	if(current_kb!= Vector2.ZERO):
-		kb_timer.wait_time += kb_duration + bonus_duration
-		current_kb += current_kb
+	if(!active):
 		return
-	current_kb = vector
+	knocked_back = true
+	apply_central_impulse(vector * 5 * kb_coeff)
 	kb_timer.wait_time = kb_duration + bonus_duration
 	kb_timer.start()
 
 func end_knockback():
-	current_kb = Vector2.ZERO
+	knocked_back = false
 
 func activate():
 	active = true
