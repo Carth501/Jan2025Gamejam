@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://ci4c8vmw8ks5m"]
+[gd_scene load_steps=6 format=4 uid="uid://ci4c8vmw8ks5m"]
 
 [ext_resource type="Script" path="res://scripts/level_.gd" id="1_giynp"]
 [ext_resource type="PackedScene" uid="uid://y7jertm1cysn" path="res://scenes/player.tscn" id="1_p7jng"]
 [ext_resource type="PackedScene" uid="uid://dxdbpa8w8wvgv" path="res://scenes/door.tscn" id="2_t2wca"]
 [ext_resource type="PackedScene" uid="uid://hijcaxy5t0yd" path="res://scenes/terrain.tscn" id="3_cxctq"]
+[ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory.tscn" id="5_g3h1j"]
 
 [node name="Level_" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_giynp")
@@ -11,8 +12,9 @@ player = NodePath("Player")
 doors = [NodePath("WestDoor"), NodePath("EastDoor")]
 level_extent = Vector2(1176, 672)
 
-[node name="Player" parent="." instance=ExtResource("1_p7jng")]
+[node name="Player" parent="." node_paths=PackedStringArray("inventory_panel") instance=ExtResource("1_p7jng")]
 position = Vector2(481, 272)
+inventory_panel = NodePath("../Inventory")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -42,6 +44,8 @@ tile_map_data = PackedByteArray("AAARAP//AwABAAIAAAARAP7/AwABAAAAAAAQAP//AwABAAE
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Inventory" parent="." instance=ExtResource("5_g3h1j")]
 
 [connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]

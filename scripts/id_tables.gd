@@ -2,9 +2,12 @@ extends Node
 
 var levels : Dictionary
 @export var level_data_path = "res://data/levels.json"
+var items : Dictionary
+@export var item_data_path = "res://data/items.json"
 
 func _ready():
 	levels = load_json_file(level_data_path)
+	items = load_json_file(item_data_path)
 
 func load_json_file(filePath: String):
 	if FileAccess.file_exists(filePath):

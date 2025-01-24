@@ -6,6 +6,7 @@ class_name Player extends CharacterBody2D
 @export var weapon: Node
 @export var pivot: Node2D 
 var inventory:= {}
+@export var inventory_panel: InventoryPanel
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -35,3 +36,4 @@ func pickup_item(object):
 		tween.tween_property(item_sprite, "scale", Vector2(0, 0), 1)
 		tween.tween_property(item_sprite, "position", Vector2(0, 0), 1)
 		tween.finished.connect(item_sprite.queue_free)
+		inventory_panel.display_inventory(inventory)
