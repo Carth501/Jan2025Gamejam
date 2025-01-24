@@ -1,9 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://btdtg84xjw0ho"]
+[gd_scene load_steps=17 format=3 uid="uid://btdtg84xjw0ho"]
 
+[ext_resource type="Texture2D" uid="uid://b6mhppqt8holc" path="res://assets/ui/ui_panel.png" id="1_3c0c6"]
 [ext_resource type="PackedScene" uid="uid://vnfy0515wnrq" path="res://scenes/menus/window_mode_button.tscn" id="1_5j0y6"]
+[ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="1_pd710"]
 [ext_resource type="PackedScene" uid="uid://bmkujr7q1lynm" path="res://scenes/menus/hotkey_rebind_button.tscn" id="1_r3k36"]
+[ext_resource type="Texture2D" uid="uid://be6ph3886ux1i" path="res://assets/ui/ui_tab_active.png" id="2_g4iqu"]
 [ext_resource type="PackedScene" uid="uid://cqnuda3vuvcul" path="res://scenes/menus/resolution_mode_button.tscn" id="2_vqjnj"]
+[ext_resource type="Texture2D" uid="uid://besdf4jfca802" path="res://assets/ui/ui_tab_hover.png" id="3_7cj45"]
 [ext_resource type="PackedScene" uid="uid://bq17dkg0i3qsm" path="res://scenes/menus/audio_slider_settings.tscn" id="3_r2pwe"]
+[ext_resource type="Texture2D" uid="uid://chaioxqqpyxva" path="res://assets/ui/ui_tab_unselected.png" id="4_lp4by"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0jlf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j30yq"]
+texture = ExtResource("1_3c0c6")
+texture_margin_left = 28.0
+texture_margin_top = 28.0
+texture_margin_right = 28.0
+texture_margin_bottom = 28.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rpmvl"]
+texture = ExtResource("2_g4iqu")
+texture_margin_left = 18.0
+texture_margin_top = 15.0
+texture_margin_right = 18.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooech"]
+texture = ExtResource("3_7cj45")
+texture_margin_left = 18.0
+texture_margin_top = 14.0
+texture_margin_right = 18.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fymn5"]
+texture = ExtResource("4_lp4by")
+texture_margin_left = 18.0
+texture_margin_top = 14.0
+texture_margin_right = 18.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0lcp"]
 
@@ -28,11 +65,21 @@ offset_right = -100.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1_pd710")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_u0jlf")
+theme_override_styles/panel = SubResource("StyleBoxTexture_j30yq")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_rpmvl")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_ooech")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_fymn5")
 tab_alignment = 1
 current_tab = 0
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/outline_size = 0
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]

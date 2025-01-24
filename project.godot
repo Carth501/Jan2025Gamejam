@@ -21,6 +21,12 @@ Global="*res://scripts/global.gd"
 SceneManagerSingle="*res://scenes/scene_manager.tscn"
 IdTablesSingle="*res://scripts/id_tables.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+
 [input]
 
 left={

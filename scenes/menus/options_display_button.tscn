@@ -1,8 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://n73lsv3tpb7c"]
+[gd_scene load_steps=7 format=3 uid="uid://n73lsv3tpb7c"]
 
-[ext_resource type="FontFile" uid="uid://b7egv21l5xsv0" path="res://assets/fonts/PixelOperator8.ttf" id="1_ekyg5"]
+[ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="1_4wr3l"]
+[ext_resource type="Texture2D" uid="uid://ueido1m62vyb" path="res://assets/ui/ui_options.png" id="2_4sk30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vqqpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_krby4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v60js"]
+texture = ExtResource("2_4sk30")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_03f0m"]
+texture = ExtResource("2_4sk30")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+modulate_color = Color(0, 0, 0, 1)
 
 [node name="Options_Display_Button" type="Control"]
 layout_mode = 3
@@ -21,7 +41,9 @@ theme_override_constants/separation = 120
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ekyg5")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("1_4wr3l")
 theme_override_font_sizes/font_size = 32
 text = "BASE_LABEL"
 vertical_alignment = 1
@@ -32,5 +54,10 @@ theme_override_constants/separation = 0
 theme_override_styles/separator = SubResource("StyleBoxEmpty_vqqpp")
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4wr3l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_krby4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v60js")
+theme_override_styles/normal = SubResource("StyleBoxTexture_03f0m")

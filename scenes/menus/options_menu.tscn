@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch5lyn0fbqmtt"]
+[gd_scene load_steps=5 format=3 uid="uid://ch5lyn0fbqmtt"]
 
-[ext_resource type="FontFile" uid="uid://chbp4bhwd5m85" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_n171r"]
 [ext_resource type="Script" path="res://scripts/menus/options_menu.gd" id="1_nibms"]
+[ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="2_uf5hy"]
 [ext_resource type="PackedScene" uid="uid://btdtg84xjw0ho" path="res://scenes/menus/settings_tab_container.tscn" id="3_av1di"]
+[ext_resource type="PackedScene" uid="uid://dtbgnqbbkn8qe" path="res://scenes/menus/button.tscn" id="4_d23fx"]
 
 [node name="Options_Menu" type="Control"]
 layout_mode = 3
@@ -21,18 +22,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = -45
+theme_override_constants/separation = -35
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("1_n171r")
+theme_override_fonts/font = ExtResource("2_uf5hy")
 theme_override_font_sizes/font_size = 32
 text = "Options"
 horizontal_alignment = 1
@@ -41,12 +42,11 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ExitButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_d23fx")]
 custom_minimum_size = Vector2(240, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
 text = "Exit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
