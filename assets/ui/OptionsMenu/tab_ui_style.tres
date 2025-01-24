@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bc33ebv3dchbw"]
+
+[ext_resource type="Texture2D" uid="uid://dt2rjruvee3t2" path="res://assets/ui/OptionsMenu/ui_tab_active.webp" id="1_wh8xy"]
+
+[resource]
+texture = ExtResource("1_wh8xy")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+expand_margin_bottom = 10.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

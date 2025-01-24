@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://diemfpp6koow7"]
+[gd_scene load_steps=7 format=3 uid="uid://diemfpp6koow7"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_vew63"]
-[ext_resource type="FontFile" uid="uid://chbp4bhwd5m85" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_uvxq6"]
-[ext_resource type="Theme" uid="uid://bnnyjedf5t8eb" path="res://resources/main_button_theme.tres" id="3_byr8r"]
+[ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="2_rssli"]
+[ext_resource type="PackedScene" uid="uid://dtbgnqbbkn8qe" path="res://scenes/menus/button.tscn" id="3_de2vb"]
 [ext_resource type="PackedScene" uid="uid://ch5lyn0fbqmtt" path="res://scenes/menus/options_menu.tscn" id="4_v5ia6"]
+
+[sub_resource type="Gradient" id="Gradient_sclph"]
+colors = PackedColorArray(0.0124841, 0.0287416, 0.0602885, 1, 0.14698, 0.264836, 0.288681, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ipeq5"]
+gradient = SubResource("Gradient_sclph")
+use_hdr = true
+fill_from = Vector2(0.705128, 0.935897)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -14,15 +22,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vew63")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.236322, 0.293356, 0.131758, 1)
+texture = SubResource("GradientTexture2D_ipeq5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -50,7 +57,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 12
 theme_override_constants/shadow_offset_y = 12
 theme_override_constants/outline_size = 24
-theme_override_fonts/font = ExtResource("2_uvxq6")
+theme_override_fonts/font = ExtResource("2_rssli")
 theme_override_font_sizes/font_size = 64
 text = "PROJECT OMEGA"
 horizontal_alignment = 1
@@ -71,31 +78,28 @@ alignment = 1
 [node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(240, 64)
+[node name="StartButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_top = NodePath("../Quit Button")
 focus_neighbor_bottom = NodePath("../OptionsButton")
-theme = ExtResource("3_byr8r")
-theme_override_font_sizes/font_size = 32
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../Quit Button")
 text = "Start"
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(240, 64)
+[node name="OptionsButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
-focus_neighbor_bottom = NodePath("../QuitButton")
-theme = ExtResource("3_byr8r")
-theme_override_font_sizes/font_size = 32
+focus_neighbor_bottom = NodePath("../Quit Button")
+focus_next = NodePath("../Quit Button")
+focus_previous = NodePath("../StartButton")
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(240, 64)
+[node name="Quit Button" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsButton")
 focus_neighbor_bottom = NodePath("../StartButton")
-theme = ExtResource("3_byr8r")
-theme_override_font_sizes/font_size = 32
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../OptionsButton")
 text = "Quit"
 
 [node name="Options_Menu" parent="." instance=ExtResource("4_v5ia6")]
@@ -104,4 +108,4 @@ layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]

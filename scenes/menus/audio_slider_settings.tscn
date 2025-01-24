@@ -1,7 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq17dkg0i3qsm"]
+[gd_scene load_steps=13 format=3 uid="uid://bq17dkg0i3qsm"]
 
 [ext_resource type="Script" path="res://scripts/menus/audio_slider_settings.gd" id="1_38d1u"]
-[ext_resource type="FontFile" uid="uid://b7egv21l5xsv0" path="res://assets/fonts/PixelOperator8.ttf" id="2_d424r"]
+[ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="2_qvcjw"]
+[ext_resource type="Texture2D" uid="uid://3mphcbgyuiyj" path="res://assets/ui/ui_slider.png" id="4_t0kxe"]
+[ext_resource type="Texture2D" uid="uid://qrrxltjfofhb" path="res://assets/ui/ui_slider_filled.png" id="5_5ew0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xkj4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j74wa"]
+load_path = "res://.godot/imported/ui_slider_grab.png-f0cbbb740a2e671cd39a3b632a7260f5.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3xp7b"]
+diffuse_texture = SubResource("CompressedTexture2D_j74wa")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1lqbh"]
+load_path = "res://.godot/imported/ui_slider_grab_hi.png-71052d822ec3ee2a7535c93e224c3db8.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ricpe"]
+texture = ExtResource("4_t0kxe")
+texture_margin_left = 20.0
+texture_margin_top = 29.0
+texture_margin_right = 20.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_upvvt"]
+texture = ExtResource("5_5ew0j")
+texture_margin_left = 20.0
+texture_margin_top = 29.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oxe05"]
+texture = ExtResource("5_5ew0j")
+texture_margin_left = 20.0
+texture_margin_top = 29.0
+texture_margin_right = 20.0
+modulate_color = Color(0.828625, 0.828624, 0.828624, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p3kj6"]
 
 [node name="Audio_Slider_Settings" type="Control"]
 layout_mode = 3
@@ -21,26 +56,33 @@ theme_override_constants/separation = 42
 [node name="Audio_Name_Lbl" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_d424r")
+theme_override_fonts/font = ExtResource("2_qvcjw")
 theme_override_font_sizes/font_size = 32
 text = "Bus Volume"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6xkj4")
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 32)
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_icons/grabber = SubResource("CanvasTexture_3xp7b")
+theme_override_icons/grabber_highlight = SubResource("CompressedTexture2D_1lqbh")
+theme_override_styles/slider = SubResource("StyleBoxTexture_ricpe")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_upvvt")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_oxe05")
 max_value = 1.0
 step = 0.001
 value = 0.5
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_p3kj6")
 
 [node name="Audio_Num_Lbl" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_d424r")
+theme_override_fonts/font = ExtResource("2_qvcjw")
 text = "50.0%"
