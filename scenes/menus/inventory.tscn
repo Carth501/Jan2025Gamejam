@@ -4,6 +4,8 @@
 
 [node name="Inventory" type="PanelContainer" node_paths=PackedStringArray("resource_list", "capacity_bar")]
 custom_minimum_size = Vector2(120, 0)
+offset_right = 120.0
+offset_bottom = 31.0
 script = ExtResource("1_q86f1")
 resource_list = NodePath("VBoxContainer/List")
 capacity_bar = NodePath("VBoxContainer/ProgressBar")
@@ -12,6 +14,7 @@ capacity_bar = NodePath("VBoxContainer/ProgressBar")
 layout_mode = 2
 
 [node name="Title" type="Control" parent="VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 
@@ -41,9 +44,9 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "X"
 
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="List" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 columns = 3
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
-layout_mode = 2
