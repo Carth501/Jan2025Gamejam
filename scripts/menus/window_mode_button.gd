@@ -18,6 +18,8 @@ func add_window_mode_items() -> void:
 		option_button.add_item(window_mode)
 
 func on_window_mode_selected(index: int) -> void:
+	SettingsSignalBus.emit_on_window_mode_selected(index)
+	
 	match index:
 		0: #Windowed
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
