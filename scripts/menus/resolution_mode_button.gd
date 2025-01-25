@@ -18,4 +18,5 @@ func add_resolution_items() -> void:
 
 func on_resolution_selected(index: int) -> void:
 	Global.debug(0,"Resolution set to: %s" % RESOLUTION_DICTIONARY.values()[index])
+	SettingsSignalBus.emit_on_resolution_selected(index)
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])

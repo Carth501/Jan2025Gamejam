@@ -11,4 +11,5 @@ func _ready():
 func _on_exit_button_pressed() -> void:
 	Global.debug(0,"Exit options menu")
 	exit_options_menu.emit()
+	SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 	set_process(false)
