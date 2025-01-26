@@ -69,6 +69,7 @@ func spawn_single_enemy():
 		new_enemy.set_player(player)
 	active_enemies.append(new_enemy)
 	new_enemy.activate()
+	new_enemy.set_level(seconds)
 
 func increment():
 	seconds += 1
