@@ -7,6 +7,7 @@ var inactive_enemies: Array[Enemy]
 @export var doors:Array[Door]
 var seconds := 0
 @export var level_extent: Vector2
+@export var phil: Phylactery
 
 var data:LevelDataHandoff
 
@@ -14,11 +15,17 @@ func _ready() -> void:
 	# if we aren't transition between levels, we don't need to wait for the SceneManager to call this
 	if data == null:
 		enter_level()
+	if(phil != null):
+		player
 
 func enter_level() -> void:
 	if data != null:
 		init_player_location()
 	_connect_to_doors()
+
+func recieve_data(new_data: LevelDataHandoff):
+	data = new_data
+	player = data.player
 
 # put player in front of the correct door, facing the correct direction
 func init_player_location() -> void:
