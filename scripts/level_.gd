@@ -28,14 +28,14 @@ func init_player_location() -> void:
 			if door.name == data.entry_door_name:
 				player.position = door.get_player_entry_vector()
 		player.orient(data.move_dir)
+		player.activate()
 
 # signal emitted by Door
 # disables doors and players
 # create handoff data to pass to the new scene (if new scene is a Level)
 func _on_player_entered_door(door:Door) -> void:
 	_disconnect_from_doors()
-	player.disable()
-	player.queue_free()
+	player.deactivate()
 	data = LevelDataHandoff.new()
 	data.entry_door_name = door.entry_door_name
 	data.move_dir = door.get_move_dir()

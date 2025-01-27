@@ -24,7 +24,6 @@ position = Vector2(5, 273)
 entry_direction = 1
 transition_type = "fade_to_black"
 push_distance = 128
-destination_id = "phil"
 entry_door_name = "EastDoor"
 
 [node name="EastDoor" parent="." instance=ExtResource("2_t2wca")]
@@ -32,7 +31,6 @@ position = Vector2(1141, 283)
 entry_direction = 3
 transition_type = "zelda"
 push_distance = 128
-destination_id = "phil"
 entry_door_name = "WestDoor"
 
 [node name="Grass" parent="." instance=ExtResource("3_cxctq")]
