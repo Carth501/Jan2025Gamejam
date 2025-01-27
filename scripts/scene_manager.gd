@@ -89,7 +89,7 @@ func on_content_finished_loading(content) -> void:
 		incoming_data = get_tree().current_scene.data as LevelDataHandoff
 	
 	if content is Level:
-		content.data = incoming_data
+		content.recieve_data(incoming_data)
 	
 	# Remove the old scene
 	outgoing_scene.queue_free()
