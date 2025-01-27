@@ -23,6 +23,7 @@ IdTablesSingle="*res://scripts/id_tables.gd"
 SettingsDataContainer="*res://scripts/autoloads/settings_data_container.gd"
 SettingsSignalBus="*res://scripts/autoloads/settings_signal_bus.gd"
 SaveManager="*res://scripts/autoloads/save_manager.gd"
+GameDirectorSingle="*res://scripts/game_director.gd"
 
 [display]
 

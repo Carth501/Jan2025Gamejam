@@ -7,12 +7,15 @@ class_name Player extends CharacterBody2D
 @export var pivot: Node2D 
 var inventory:= {}
 @export var inventory_panel: InventoryPanel
+var active:= true
 
 func get_input():
+	if(!active):
+		return
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	if(input_direction.length() != 0):
-		pivot.set_rotation(input_direction.angle())
+		orient(input_direction)
 
 func _physics_process(delta):
 	get_input()
@@ -37,3 +40,12 @@ func pickup_item(object):
 		tween.tween_property(item_sprite, "position", Vector2(0, 0), 1)
 		tween.finished.connect(item_sprite.queue_free)
 		inventory_panel.display_inventory(inventory)
+
+func activate():
+	active= true
+
+func deactivate():
+	active= false
+
+func orient(move_dir: Vector2):
+	pivot.set_rotation(move_dir.angle())

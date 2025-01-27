@@ -5,19 +5,27 @@ signal player_entered_door(door:Door,transition_type:String)
 @export_enum("north","east","south","west") var entry_direction
 @export_enum("fade_to_black","fade_to_white","wipe_to_left","wipe_to_right","zelda") var transition_type:String
 @export var push_distance:int = 16
-@export var destination_id:String
 @export var entry_door_name:String
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
 	player_entered_door.emit(self)
-	if transition_type == "zelda":
-		SceneManagerSingle.load_level_zelda(destination_id)
-	else:
-		SceneManagerSingle.load_new_scene(destination_id,transition_type)
-	queue_free()
+	GameDirectorSingle.change_room(get_direction(), transition_type)
 # UTILITY FUNCTIONS
+
+func get_direction():
+	match entry_direction:
+		0:
+			return Vector2.UP
+		1:
+			return Vector2.RIGHT
+		2:
+			return Vector2.DOWN
+		3:
+			return Vector2.LEFT
+		_:
+			return Vector2.UP
 
 # returns the starting location of the player based on this door's location and the
 # entry_direction (the Vector towards the room)
