@@ -1,0 +1,6 @@
+{
+	"blood_drop": {
+		"mass": 2,
+		"icon_path": "res://assets/items/blood_drop.png"
+	}
+}

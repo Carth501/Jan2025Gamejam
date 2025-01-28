@@ -1,6 +1,38 @@
 {
-	"phil": {
-		"path": "res://scenes/level_.tscn",
+	"phylactery": {
+		"path": "res://scenes/rooms/level_.tscn",
 		"effects": {}
-	}
+	},
+	"desert": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"plains": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"ruins": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"jungle": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"swamp": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"alpine": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"badlands": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
+	"hell": {
+		"path": "res://scenes/rooms/level_.tscn",
+		"effects": {}
+	},
 }

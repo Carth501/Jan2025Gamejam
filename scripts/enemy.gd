@@ -5,11 +5,11 @@ signal dead(enemy_ref)
 
 @export_category("Statistics")
 @export var active:= true
-@export var max_health: float = 40.0
-@export var current_health: float = 40.0
-@export var max_mana: float = 10.0
-@export var current_mana: float = 10.0
-@export var attack: int = 5
+@export var max_health: float = 10.0
+var current_health: float = 10.0
+@export var max_mana: float = 5.0
+var current_mana: float = 5.0
+@export var attack: int = 1
 @export var range: float = 50.0
 @export var defense: int = 1
 @export var speed:= 60.0
@@ -35,6 +35,23 @@ func _ready() -> void:
 	cooldown_timer.one_shot= true
 	add_child(cooldown_timer)
 	cooldown_timer.timeout.connect(ready_to_attack)
+
+func set_level(value: int):
+	# defaults
+	max_health = 10.0
+	current_health = 10.0
+	max_mana = 5.0
+	current_mana = 5.0
+	attack = 1
+	range = 50.0
+	defense = 1
+	speed = 60.0
+	kb_coeff = 1.0
+	kb_duration = 0.25
+	max_health += 6 * pow(value/60, 2) 
+	attack += floori(value/60)
+	defense += floori(value/60)
+	speed += value / 2
 
 func set_player(new_player: Player):
 	player = new_player
@@ -78,7 +95,7 @@ func die():
 func takeDamage(amount) -> void:
 	if(!active):
 		return
-	current_health -= amount
+	current_health -= maxi(amount - defense, 1)
 	if(current_health < 0):
 		no_health.emit()
 

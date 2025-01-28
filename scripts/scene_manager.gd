@@ -46,7 +46,7 @@ func _load_content(level_id:String) -> void:
 	if not ResourceLoader.exists(_content_path) or loader == null:
 		content_invalid.emit(_content_path)
 		return
-	
+
 	_load_progress_timer.wait_time = 0.1
 	_load_progress_timer.start()
 
@@ -89,7 +89,7 @@ func on_content_finished_loading(content) -> void:
 		incoming_data = get_tree().current_scene.data as LevelDataHandoff
 	
 	if content is Level:
-		content.data = incoming_data
+		content.recieve_data(incoming_data)
 	
 	# Remove the old scene
 	outgoing_scene.queue_free()
@@ -125,7 +125,7 @@ func on_zelda_content_finished_loading(content) -> void:
 	# slide new level in
 	content.position.x = incoming_data.move_dir.x * LEVEL_W
 	content.position.y = incoming_data.move_dir.y * LEVEL_H
-	var tween_in:Tween = get_tree().create_tweeen()
+	var tween_in:Tween = get_tree().create_tween()
 	tween_in.tween_property(content, "position", Vector2.ZERO, 1).set_trans(Tween.TRANS_SINE)
 	
 	# slide old level out

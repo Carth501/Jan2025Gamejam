@@ -7,6 +7,7 @@ var inactive_enemies: Array[Enemy]
 @export var doors:Array[Door]
 var seconds := 0
 @export var level_extent: Vector2
+@export var phil: Phylactery
 
 var data:LevelDataHandoff
 
@@ -14,11 +15,17 @@ func _ready() -> void:
 	# if we aren't transition between levels, we don't need to wait for the SceneManager to call this
 	if data == null:
 		enter_level()
+	if(phil != null):
+		player
 
 func enter_level() -> void:
 	if data != null:
 		init_player_location()
 	_connect_to_doors()
+
+func recieve_data(new_data: LevelDataHandoff):
+	data = new_data
+	player = data.player
 
 # put player in front of the correct door, facing the correct direction
 func init_player_location() -> void:
@@ -28,14 +35,14 @@ func init_player_location() -> void:
 			if door.name == data.entry_door_name:
 				player.position = door.get_player_entry_vector()
 		player.orient(data.move_dir)
+		player.activate()
 
 # signal emitted by Door
 # disables doors and players
 # create handoff data to pass to the new scene (if new scene is a Level)
 func _on_player_entered_door(door:Door) -> void:
 	_disconnect_from_doors()
-	player.disable()
-	player.queue_free()
+	player.deactivate()
 	data = LevelDataHandoff.new()
 	data.entry_door_name = door.entry_door_name
 	data.move_dir = door.get_move_dir()
@@ -69,6 +76,7 @@ func spawn_single_enemy():
 		new_enemy.set_player(player)
 	active_enemies.append(new_enemy)
 	new_enemy.activate()
+	new_enemy.set_level(seconds)
 
 func increment():
 	seconds += 1
