@@ -23,9 +23,8 @@ func enter_level() -> void:
 		init_player_location()
 	_connect_to_doors()
 
-func recieve_data(new_data: LevelDataHandoff):
+func receive_data(new_data: LevelDataHandoff):
 	data = new_data
-	player = data.player
 
 # put player in front of the correct door, facing the correct direction
 func init_player_location() -> void:

@@ -45,5 +45,5 @@ autostart = true
 
 [node name="Inventory" parent="." instance=ExtResource("5_1e53p")]
 
-[connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
+[connection signal="timeout" from="Timer" to="." method="increment"]
