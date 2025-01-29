@@ -3,6 +3,13 @@ class_name InventoryPanel extends PanelContainer
 @export var resource_list: GridContainer
 @export var capacity_bar: ProgressBar
 var existing_buttons:= {}
+@export var capacity_limit:= 0.0
+
+func _ready() -> void:
+	if(capacity_limit > 0.0):
+		capacity_bar.visible = true
+	else:
+		capacity_bar.visible = false
 
 func display_inventory(new_inv: Dictionary):
 	for item_id in new_inv:
