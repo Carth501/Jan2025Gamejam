@@ -8,6 +8,7 @@ class_name Player extends CharacterBody2D
 var inventory:= {}
 @export var inventory_panel: InventoryPanel
 var active:= true
+@export var sprite: AnimatedSprite2D
 
 func get_input():
 	if(!active):
@@ -16,6 +17,13 @@ func get_input():
 	velocity = input_direction * speed
 	if(input_direction.length() != 0):
 		orient(input_direction)
+		sprite.animation = "walk"
+		if(input_direction.x > 0):
+			sprite.set_flip_h(false)
+		elif(input_direction.x < 0):
+			sprite.set_flip_h(true)
+	else:
+		sprite.animation = "idle"
 
 func _physics_process(delta):
 	get_input()
