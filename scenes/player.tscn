@@ -1,10 +1,26 @@
-[gd_scene load_steps=41 format=3 uid="uid://y7jertm1cysn"]
+[gd_scene load_steps=51 format=3 uid="uid://y7jertm1cysn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdhu5"]
 [ext_resource type="Script" path="res://resources/stats.gd" id="2_bwugf"]
 [ext_resource type="Texture2D" uid="uid://bvnyjx71xvte1" path="res://assets/Player/placeholder.png" id="2_nmue7"]
+[ext_resource type="Texture2D" uid="uid://dopqt4ig3vmog" path="res://assets/Player/01_PC_Lich_Run_0000.png" id="4_5ksli"]
 [ext_resource type="PackedScene" uid="uid://dukpldyxg3v66" path="res://scenes/weapons/claws.tscn" id="4_vyxao"]
 [ext_resource type="Texture2D" uid="uid://cfnk3315qsb4b" path="res://icon.svg" id="5_ondsp"]
+[ext_resource type="Texture2D" uid="uid://ck5puvasx6807" path="res://assets/Player/01_PC_Lich_Run_0001.png" id="5_yrgoe"]
+[ext_resource type="Texture2D" uid="uid://bucmrxhf6c200" path="res://assets/Player/01_PC_Lich_Run_0002.png" id="6_t72s4"]
+[ext_resource type="Texture2D" uid="uid://dmlmuj5wlmj82" path="res://assets/Player/01_PC_Lich_Run_0003.png" id="7_jtflm"]
+[ext_resource type="Texture2D" uid="uid://cedm1i0sqywm1" path="res://assets/Player/01_PC_Lich_Run_0004.png" id="8_t366i"]
+[ext_resource type="Texture2D" uid="uid://c0nmttpv23hc1" path="res://assets/Player/01_PC_Lich_Run_0005.png" id="9_h4d58"]
+[ext_resource type="Texture2D" uid="uid://bqplpny07c6ok" path="res://assets/Player/01_PC_Lich_Run_0006.png" id="10_chgmq"]
+[ext_resource type="Texture2D" uid="uid://q53ddvriw7np" path="res://assets/Player/01_PC_Lich_Run_0007.png" id="11_6uclm"]
+[ext_resource type="Texture2D" uid="uid://do50vjdh2ls0" path="res://assets/Player/01_PC_Lich_Run_0008.png" id="12_qfsgj"]
+[ext_resource type="Texture2D" uid="uid://cqs1lpc13od1r" path="res://assets/Player/01_PC_Lich_Run_0009.png" id="13_g33u6"]
+[ext_resource type="Texture2D" uid="uid://3r6mewnnhiwe" path="res://assets/Player/01_PC_Lich_Run_0010.png" id="14_j3mqd"]
+[ext_resource type="Texture2D" uid="uid://ctgx3isbbx2dg" path="res://assets/Player/01_PC_Lich_Run_0011.png" id="15_uxpxl"]
+[ext_resource type="Texture2D" uid="uid://c35yksr22itd7" path="res://assets/Player/01_PC_Lich_Run_0012.png" id="16_pxg2w"]
+[ext_resource type="Texture2D" uid="uid://iou04p5fab0a" path="res://assets/Player/01_PC_Lich_Run_0013.png" id="17_wisj2"]
+[ext_resource type="Texture2D" uid="uid://d0kiwu1j1uv0j" path="res://assets/Player/01_PC_Lich_Run_0014.png" id="18_yf3am"]
+[ext_resource type="Texture2D" uid="uid://jcofllvvgyql" path="res://assets/Player/01_PC_Lich_Run_0015.png" id="19_xt1vl"]
 
 [sub_resource type="Resource" id="Resource_seq5a"]
 script = ExtResource("2_bwugf")
@@ -118,30 +134,6 @@ region = Rect2(960, 0, 192, 192)
 atlas = ExtResource("2_nmue7")
 region = Rect2(1152, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3wp1v"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(0, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yrop2"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(192, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3d2xa"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(384, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1q0n"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(576, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rub78"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(768, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uelfc"]
-atlas = ExtResource("2_nmue7")
-region = Rect2(960, 192, 192, 192)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_m7ph5"]
 animations = [{
 "frames": [{
@@ -241,22 +233,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3wp1v")
+"texture": ExtResource("4_5ksli")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yrop2")
+"texture": ExtResource("5_yrgoe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3d2xa")
+"texture": ExtResource("6_t72s4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e1q0n")
+"texture": ExtResource("7_jtflm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rub78")
+"texture": ExtResource("8_t366i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uelfc")
+"texture": ExtResource("9_h4d58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_chgmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6uclm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qfsgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_g33u6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j3mqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_uxpxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pxg2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_wisj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_yf3am")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xt1vl")
 }],
 "loop": true,
 "name": &"walk",
@@ -269,7 +291,7 @@ radius = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_w3uni"]
 radius = 75.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthbar", "weapon", "pivot")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("healthbar", "weapon", "pivot", "sprite")]
 collision_layer = 3
 platform_on_leave = 2
 platform_floor_layers = 4294967040
@@ -278,11 +300,13 @@ stats = SubResource("Resource_seq5a")
 healthbar = NodePath("HealthBar")
 weapon = NodePath("Pivot/Claws")
 pivot = NodePath("Pivot")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
+scale = Vector2(0.04, 0.04)
 sprite_frames = SubResource("SpriteFrames_m7ph5")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
