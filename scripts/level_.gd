@@ -1,4 +1,4 @@
-class_name Level extends Node2D
+class_name Level extends Node
 
 @export var player:Player
 var active_enemies: Array[Enemy]
@@ -8,6 +8,8 @@ var inactive_enemies: Array[Enemy]
 var seconds := 0
 @export var level_extent: Vector2
 @export var phil: Phylactery
+@export var inventory_display: InventoryPanel
+@export var phil_inventory_display: InventoryPanel
 
 var data:LevelDataHandoff
 
@@ -21,6 +23,8 @@ func _ready() -> void:
 func enter_level() -> void:
 	if data != null:
 		init_player_location()
+	if(inventory_display != null):
+		player.set_inventory_display(inventory_display)
 	_connect_to_doors()
 
 func receive_data(new_data: LevelDataHandoff):
@@ -34,6 +38,7 @@ func init_player_location() -> void:
 			if door.name == data.entry_door_name:
 				player.position = door.get_player_entry_vector()
 		player.orient(data.move_dir)
+		player.set_inventory_display(inventory_display)
 		player.activate()
 
 # signal emitted by Door
