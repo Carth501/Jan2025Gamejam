@@ -6,7 +6,8 @@ class_name Player extends CharacterBody2D
 @export var weapon: Node
 @export var pivot: Node2D 
 var inventory:= {}
-@export var inventory_panel: InventoryPanel
+var inventory_panel: InventoryPanel
+var phil_inventory:= {}
 var active:= true
 @export var sprite: AnimatedSprite2D
 
@@ -33,6 +34,8 @@ func _process(delta: float) -> void:
 	healthbar.value = stats.current_health/stats.max_health*100.0
 
 func pickup_item(object):
+	if(!active):
+		return
 	if(object.has_method("get_item_id")):
 		var item_quantity = inventory.get_or_add(object.get_item_id(), 0)
 		item_quantity += object.get_quantity()
@@ -47,7 +50,12 @@ func pickup_item(object):
 		tween.tween_property(item_sprite, "scale", Vector2(0, 0), 1)
 		tween.tween_property(item_sprite, "position", Vector2(0, 0), 1)
 		tween.finished.connect(item_sprite.queue_free)
+		if(inventory_panel == null):
+			return
 		inventory_panel.display_inventory(inventory)
+
+func set_inventory_display(new_display: InventoryPanel):
+	inventory_panel = new_display
 
 func activate():
 	active= true

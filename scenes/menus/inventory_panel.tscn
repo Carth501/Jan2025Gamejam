@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bel8mopyxoc7h"]
 
-[ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_q86f1"]
+[ext_resource type="Script" path="res://scripts/menus/inventory_panel.gd" id="1_q86f1"]
 
 [node name="Inventory" type="PanelContainer" node_paths=PackedStringArray("resource_list", "capacity_bar")]
 custom_minimum_size = Vector2(120, 0)
