@@ -49,5 +49,5 @@ autostart = true
 [node name="Phylactery" parent="." instance=ExtResource("6_tr5h4")]
 position = Vector2(248, 312)
 
-[connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
+[connection signal="timeout" from="Timer" to="." method="increment"]
