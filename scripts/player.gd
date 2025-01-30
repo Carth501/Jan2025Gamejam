@@ -10,6 +10,8 @@ var inventory_panel: InventoryPanel
 var phil_inventory:= {}
 var active:= true
 @export var sprite: AnimatedSprite2D
+var upgrade_1:= false
+var upgrade_2:= false
 
 func get_input():
 	if(!active):
@@ -50,9 +52,7 @@ func pickup_item(object):
 		tween.tween_property(item_sprite, "scale", Vector2(0, 0), 1)
 		tween.tween_property(item_sprite, "position", Vector2(0, 0), 1)
 		tween.finished.connect(item_sprite.queue_free)
-		if(inventory_panel == null):
-			return
-		inventory_panel.display_inventory(inventory)
+		update_inventory_display()
 
 func set_inventory(new_dictionary: Dictionary):
 	inventory = new_dictionary
@@ -71,3 +71,8 @@ func deactivate():
 
 func orient(move_dir: Vector2):
 	pivot.set_rotation(move_dir.angle())
+
+func update_inventory_display():
+	if(inventory_panel == null):
+		return
+	inventory_panel.display_inventory(inventory)

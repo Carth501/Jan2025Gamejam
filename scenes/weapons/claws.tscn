@@ -5,8 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uq24"]
 radius = 30.0
 
-[node name="Claws" type="Area2D"]
+[node name="Claws" type="Area2D" node_paths=PackedStringArray("shape")]
 script = ExtResource("1_ayov1")
+shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2uq24")
