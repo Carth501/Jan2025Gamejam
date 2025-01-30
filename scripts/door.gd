@@ -6,8 +6,11 @@ signal player_entered_door(door:Door,transition_type:String)
 @export_enum("fade_to_black","fade_to_white","wipe_to_left","wipe_to_right","zelda") var transition_type:String
 @export var push_distance:int = 16
 @export var entry_door_name:String
+@export var active:= false
 
 func _on_body_entered(body: Node2D) -> void:
+	if(!active):
+		return
 	if not body is Player:
 		return
 	player_entered_door.emit(self)
@@ -52,3 +55,9 @@ func get_move_dir() -> Vector2:
 		2:
 			dir = Vector2.UP
 	return dir
+
+func activate():
+	active = true
+
+func deactivate():
+	active = false

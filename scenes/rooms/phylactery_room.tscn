@@ -68,5 +68,5 @@ offset_left = -120.0
 offset_right = 0.0
 grow_horizontal = 0
 
-[connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
+[connection signal="timeout" from="Timer" to="." method="increment"]

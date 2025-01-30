@@ -52,6 +52,7 @@ tile_map_data = PackedByteArray("AAARAP//AwABAAIAAAARAP7/AwABAAAAAAAQAP//AwABAAE
 autostart = true
 
 [node name="Inventory" parent="." instance=ExtResource("5_1e53p")]
+layout_mode = 0
 
 [node name="RoomDangerMeter" type="Panel" parent="."]
 layout_mode = 1
@@ -75,8 +76,8 @@ offset_top = 24.0
 offset_right = 200.0
 offset_bottom = 51.0
 step = 1.0
-value = 120.0
+value = 100.0
 allow_greater = true
 
-[connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
+[connection signal="timeout" from="Timer" to="." method="increment"]
