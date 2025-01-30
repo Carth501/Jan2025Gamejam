@@ -10,6 +10,7 @@ var seconds := 0
 @export var phil: Phylactery
 @export var inventory_display: InventoryPanel
 @export var phil_inventory_display: InventoryPanel
+@export var enemies:= true
 
 var data:LevelDataHandoff
 
@@ -40,6 +41,8 @@ func init_player_location() -> void:
 		player.orient(data.move_dir)
 		player.set_inventory_display(inventory_display)
 		player.activate()
+		player.set_inventory(data.inventory)
+		player.stats.current_health = data.player_health
 
 # signal emitted by Door
 # disables doors and players
@@ -50,6 +53,8 @@ func _on_player_entered_door(door:Door) -> void:
 	data = LevelDataHandoff.new()
 	data.entry_door_name = door.entry_door_name
 	data.move_dir = door.get_move_dir()
+	data.inventory = player.inventory
+	data.player_health = player.stats.current_health
 	set_process(false)
 
 func _connect_to_doors() -> void:
@@ -63,6 +68,8 @@ func _disconnect_from_doors() -> void:
 			door.player_entered_door.disconnect(_on_player_entered_door)
 
 func spawn_enemies() -> void:
+	if(!enemies):
+		return
 	var count_to_be_created = calculate_enemies_to_be_created()
 	for r in count_to_be_created:
 		spawn_single_enemy()

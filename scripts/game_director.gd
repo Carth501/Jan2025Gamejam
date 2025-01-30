@@ -24,9 +24,11 @@ func create_starting_map():
 	map[-1][0]= room_ids.pop_front()
 	map[-1][1]= room_ids.pop_front()
 
-func get_room_id(x: int, y: int) -> String:
+func get_room_id(new_x: int, new_y: int) -> String:
 	print(str('x:', x, ' y:', y))
-	if(map.has(x) && map[x].has(y)):
+	if(map.has(new_x) && map[x].has(new_y)):
+		x = new_x
+		y = new_y
 		return map[x][y]
 	return 'invalid'
 
@@ -34,6 +36,7 @@ func load_map(target_map: Dictionary):
 	map = target_map
 
 func change_room(exit: Vector2, transition_type):
+	print(str(exit))
 	var destination_id = get_room_id(x + exit.x, y + exit.y)
 	print(destination_id)
 	if(destination_id != 'invalid'):

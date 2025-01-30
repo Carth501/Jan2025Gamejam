@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://41bvy6a6qp" path="res://scenes/phylactery.tscn" id="6_tr5h4"]
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="6_wnoto"]
 
-[node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display")]
+[node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,8 @@ player = NodePath("Player")
 doors = [NodePath("WestDoor"), NodePath("EastDoor")]
 phil = NodePath("Phylactery")
 inventory_display = NodePath("Inventory")
+phil_inventory_display = NodePath("PhilInventory")
+enemies = false
 
 [node name="Player" parent="." instance=ExtResource("2_admc0")]
 position = Vector2(481, 272)
@@ -55,6 +57,7 @@ autostart = true
 position = Vector2(248, 312)
 
 [node name="Inventory" parent="." instance=ExtResource("6_wnoto")]
+layout_mode = 0
 
 [node name="PhilInventory" parent="." instance=ExtResource("6_wnoto")]
 layout_mode = 1
