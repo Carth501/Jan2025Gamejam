@@ -11,6 +11,7 @@ var seconds := 0
 @export var inventory_display: InventoryPanel
 @export var phil_inventory_display: InventoryPanel
 @export var enemies:= true
+@export var room_danger_meter: ProgressBar
 
 var data:LevelDataHandoff
 
@@ -91,6 +92,8 @@ func spawn_single_enemy():
 
 func increment():
 	seconds += 1
+	if(room_danger_meter != null):
+		room_danger_meter.value = roundi((seconds * 0.8) / 1.8) + 20
 
 func calculate_current_max_enemies() -> int:
 	return (seconds / 3.0) + 20
