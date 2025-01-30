@@ -195,10 +195,11 @@ show_percentage = false
 
 [node name="Pivot" type="Node2D" parent="."]
 
-[node name="Claws" parent="Pivot" instance=ExtResource("4_vyxao")]
+[node name="Claws" parent="Pivot" node_paths=PackedStringArray("player") instance=ExtResource("4_vyxao")]
 position = Vector2(62, 0)
 collision_layer = 3
 collision_mask = 3
+player = NodePath("../..")
 
 [node name="TextureRect" type="TextureRect" parent="Pivot/Claws"]
 offset_left = -16.0

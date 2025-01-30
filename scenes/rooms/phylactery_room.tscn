@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://41bvy6a6qp" path="res://scenes/phylactery.tscn" id="6_tr5h4"]
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="6_wnoto"]
 
-[node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display")]
+[node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display", "upgrade_1", "upgrade_2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +21,8 @@ phil = NodePath("Phylactery")
 inventory_display = NodePath("Inventory")
 phil_inventory_display = NodePath("PhilInventory")
 enemies = false
+upgrade_1 = NodePath("CraftingPanel/VBoxContainer/Upgrade1")
+upgrade_2 = NodePath("CraftingPanel/VBoxContainer/Upgrade2")
 
 [node name="Player" parent="." instance=ExtResource("2_admc0")]
 position = Vector2(481, 272)
@@ -60,6 +62,7 @@ position = Vector2(248, 312)
 layout_mode = 0
 
 [node name="PhilInventory" parent="." instance=ExtResource("6_wnoto")]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -68,5 +71,32 @@ offset_left = -120.0
 offset_right = 0.0
 grow_horizontal = 0
 
+[node name="CraftingPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CraftingPanel"]
+layout_mode = 2
+
+[node name="Upgrade1" type="Button" parent="CraftingPanel/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "20x Blood"
+text = "Claws: Increase size on kill, stacking diminishingly."
+
+[node name="Upgrade2" type="Button" parent="CraftingPanel/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "30x Blood"
+text = "Claws: Bonus damage after 2 seconds without dealing damage."
+
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]
+[connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade1" to="." method="purchase_upgrade_1"]
+[connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade2" to="." method="purchase_upgrade_2"]

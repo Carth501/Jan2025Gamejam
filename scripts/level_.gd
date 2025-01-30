@@ -12,6 +12,8 @@ var seconds := 0
 @export var phil_inventory_display: InventoryPanel
 @export var enemies:= true
 @export var room_danger_meter: ProgressBar
+@export var upgrade_1: Button
+@export var upgrade_2: Button
 
 var data:LevelDataHandoff
 
@@ -25,6 +27,9 @@ func _ready() -> void:
 func enter_level() -> void:
 	if data != null:
 		init_player_location()
+		player.upgrade_1 = data.upgrade_1
+		player.upgrade_2 = data.upgrade_2
+		update_upgrade_options()
 	if(inventory_display != null):
 		player.set_inventory_display(inventory_display)
 	_connect_to_doors()
@@ -57,6 +62,8 @@ func _on_player_entered_door(door:Door) -> void:
 	data.move_dir = door.get_move_dir()
 	data.inventory = player.inventory
 	data.player_health = player.stats.current_health
+	data.upgrade_1 = player.upgrade_1
+	data.upgrade_2 = player.upgrade_2
 	set_process(false)
 
 func _connect_to_doors() -> void:
@@ -126,3 +133,29 @@ func get_random_spawn_point() -> Vector2:
 func activate_doors():
 	for door in doors:
 		door.activate()
+
+func purchase_upgrade_1():
+	if(player.inventory.has("blood_drop") && player.inventory["blood_drop"]>=20):
+		player.upgrade_1 = true
+		player.inventory["blood_drop"]= player.inventory["blood_drop"]-20
+		player.update_inventory_display()
+		update_upgrade_options()
+
+func purchase_upgrade_2():
+	if(player.inventory.has("blood_drop") && player.inventory["blood_drop"]>=30):
+		player.upgrade_2 = true
+		player.inventory["blood_drop"]-=30
+		player.update_inventory_display()
+		update_upgrade_options()
+
+func update_upgrade_options():
+	if(upgrade_1 != null):
+		if(player.upgrade_1):
+			upgrade_1.disabled = true
+		if(!player.inventory.has("blood_drop") || !player.inventory["blood_drop"]>=20):
+			upgrade_1.disabled = true
+	if(upgrade_2 != null):
+		if(player.upgrade_2):
+			upgrade_2.disabled = true
+		if(!player.inventory.has("blood_drop") || !player.inventory["blood_drop"]>=30):
+			upgrade_2.disabled = true
