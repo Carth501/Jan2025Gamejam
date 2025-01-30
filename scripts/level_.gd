@@ -28,6 +28,7 @@ func enter_level() -> void:
 	if(inventory_display != null):
 		player.set_inventory_display(inventory_display)
 	_connect_to_doors()
+	activate_doors()
 
 func receive_data(new_data: LevelDataHandoff):
 	data = new_data
@@ -121,3 +122,7 @@ func get_random_spawn_point() -> Vector2:
 		return Vector2(level_extent.x, level_extent.y * randf())
 	else:
 		return Vector2.ZERO
+
+func activate_doors():
+	for door in doors:
+		door.activate()

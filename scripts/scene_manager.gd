@@ -110,6 +110,7 @@ func on_content_finished_loading(content) -> void:
 		
 		if content is Level:
 			content.enter_level()
+			content.activate_doors()
 
 func on_zelda_content_finished_loading(content) -> void:
 	var outgoing_scene = get_tree().current_scene
@@ -145,6 +146,7 @@ func on_zelda_content_finished_loading(content) -> void:
 	if content is Level:
 		content.init_player_location()
 		content.enter_level()
+		content.activate_doors()
 	
 	# Remove the old scene
 	outgoing_scene.queue_free()
