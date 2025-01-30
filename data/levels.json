@@ -1,6 +1,6 @@
 {
 	"phylactery": {
-		"path": "res://scenes/rooms/level_.tscn",
+		"path": "res://scenes/rooms/phylactery_room.tscn",
 		"effects": {}
 	},
 	"desert": {

@@ -54,6 +54,12 @@ func pickup_item(object):
 			return
 		inventory_panel.display_inventory(inventory)
 
+func set_inventory(new_dictionary: Dictionary):
+	inventory = new_dictionary
+	if(inventory_panel == null):
+		return
+	inventory_panel.display_inventory(inventory)
+
 func set_inventory_display(new_display: InventoryPanel):
 	inventory_panel = new_display
 
