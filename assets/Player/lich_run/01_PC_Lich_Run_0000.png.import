@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iou04p5fab0a"
-path="res://.godot/imported/01_PC_Lich_Run_0013.png-8325fece10fc1f4903718acd9e08a7df.ctex"
+uid="uid://dopqt4ig3vmog"
+path="res://.godot/imported/01_PC_Lich_Run_0000.png-6437d26c1359371d3d47cee9ae8d0802.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/01_PC_Lich_Run_0013.png"
-dest_files=["res://.godot/imported/01_PC_Lich_Run_0013.png-8325fece10fc1f4903718acd9e08a7df.ctex"]
+source_file="res://assets/Player/lich_run/01_PC_Lich_Run_0000.png"
+dest_files=["res://.godot/imported/01_PC_Lich_Run_0000.png-6437d26c1359371d3d47cee9ae8d0802.ctex"]
 
 [params]
 
