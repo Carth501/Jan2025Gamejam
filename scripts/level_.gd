@@ -10,6 +10,10 @@ var seconds := 0
 @export var phil: Phylactery
 @export var inventory_display: InventoryPanel
 @export var phil_inventory_display: InventoryPanel
+@export var enemies:= true
+@export var room_danger_meter: ProgressBar
+@export var upgrade_1: Button
+@export var upgrade_2: Button
 
 var data:LevelDataHandoff
 
@@ -23,9 +27,13 @@ func _ready() -> void:
 func enter_level() -> void:
 	if data != null:
 		init_player_location()
+		player.upgrade_1 = data.upgrade_1
+		player.upgrade_2 = data.upgrade_2
+		update_upgrade_options()
 	if(inventory_display != null):
 		player.set_inventory_display(inventory_display)
 	_connect_to_doors()
+	activate_doors()
 
 func receive_data(new_data: LevelDataHandoff):
 	data = new_data
@@ -40,6 +48,8 @@ func init_player_location() -> void:
 		player.orient(data.move_dir)
 		player.set_inventory_display(inventory_display)
 		player.activate()
+		player.set_inventory(data.inventory)
+		player.stats.current_health = data.player_health
 
 # signal emitted by Door
 # disables doors and players
@@ -50,6 +60,10 @@ func _on_player_entered_door(door:Door) -> void:
 	data = LevelDataHandoff.new()
 	data.entry_door_name = door.entry_door_name
 	data.move_dir = door.get_move_dir()
+	data.inventory = player.inventory
+	data.player_health = player.stats.current_health
+	data.upgrade_1 = player.upgrade_1
+	data.upgrade_2 = player.upgrade_2
 	set_process(false)
 
 func _connect_to_doors() -> void:
@@ -63,6 +77,8 @@ func _disconnect_from_doors() -> void:
 			door.player_entered_door.disconnect(_on_player_entered_door)
 
 func spawn_enemies() -> void:
+	if(!enemies):
+		return
 	var count_to_be_created = calculate_enemies_to_be_created()
 	for r in count_to_be_created:
 		spawn_single_enemy()
@@ -84,6 +100,8 @@ func spawn_single_enemy():
 
 func increment():
 	seconds += 1
+	if(room_danger_meter != null):
+		room_danger_meter.value = roundi((seconds * 0.8) / 1.8) + 20
 
 func calculate_current_max_enemies() -> int:
 	return (seconds / 3.0) + 20
@@ -111,3 +129,33 @@ func get_random_spawn_point() -> Vector2:
 		return Vector2(level_extent.x, level_extent.y * randf())
 	else:
 		return Vector2.ZERO
+
+func activate_doors():
+	for door in doors:
+		door.activate()
+
+func purchase_upgrade_1():
+	if(player.inventory.has("blood_drop") && player.inventory["blood_drop"]>=20):
+		player.upgrade_1 = true
+		player.inventory["blood_drop"]= player.inventory["blood_drop"]-20
+		player.update_inventory_display()
+		update_upgrade_options()
+
+func purchase_upgrade_2():
+	if(player.inventory.has("blood_drop") && player.inventory["blood_drop"]>=30):
+		player.upgrade_2 = true
+		player.inventory["blood_drop"]-=30
+		player.update_inventory_display()
+		update_upgrade_options()
+
+func update_upgrade_options():
+	if(upgrade_1 != null):
+		if(player.upgrade_1):
+			upgrade_1.disabled = true
+		if(!player.inventory.has("blood_drop") || !player.inventory["blood_drop"]>=20):
+			upgrade_1.disabled = true
+	if(upgrade_2 != null):
+		if(player.upgrade_2):
+			upgrade_2.disabled = true
+		if(!player.inventory.has("blood_drop") || !player.inventory["blood_drop"]>=30):
+			upgrade_2.disabled = true
