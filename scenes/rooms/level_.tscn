@@ -72,5 +72,14 @@ step = 1.0
 value = 100.0
 allow_greater = true
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1131.0
+offset_top = 323.0
+offset_right = 1181.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 44
+text = "=>"
+
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]

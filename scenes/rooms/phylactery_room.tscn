@@ -89,6 +89,15 @@ layout_mode = 2
 tooltip_text = "30x Blood"
 text = "Claws: Bonus damage after 2 seconds without dealing damage."
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 327.0
+offset_right = 137.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 53
+text = "<="
+
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade1" to="." method="purchase_upgrade_1"]
