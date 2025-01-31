@@ -1,11 +1,10 @@
-[gd_scene load_steps=41 format=3 uid="uid://y7jertm1cysn"]
+[gd_scene load_steps=40 format=3 uid="uid://y7jertm1cysn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdhu5"]
 [ext_resource type="Script" path="res://resources/stats.gd" id="2_bwugf"]
 [ext_resource type="Texture2D" uid="uid://dtradvpievlmf" path="res://assets/Player/PC_Lich_Idle_Anim/PC_Lich_IdleAnim_0000.png" id="4_f2so7"]
 [ext_resource type="PackedScene" uid="uid://dukpldyxg3v66" path="res://scenes/weapons/claws.tscn" id="4_vyxao"]
 [ext_resource type="Texture2D" uid="uid://ehgwtuc4syby" path="res://assets/Player/PC_Lich_Idle_Anim/PC_Lich_IdleAnim_0001.png" id="5_68rne"]
-[ext_resource type="Texture2D" uid="uid://cfnk3315qsb4b" path="res://icon.svg" id="5_ondsp"]
 [ext_resource type="Texture2D" uid="uid://ycxwygwtk6ij" path="res://assets/Player/PC_Lich_Idle_Anim/PC_Lich_IdleAnim_0002.png" id="6_vsj84"]
 [ext_resource type="Texture2D" uid="uid://cg3lb5d1a6ced" path="res://assets/Player/PC_Lich_Idle_Anim/PC_Lich_IdleAnim_0003.png" id="7_x3lnt"]
 [ext_resource type="Texture2D" uid="uid://bkuyl0edr2d52" path="res://assets/Player/PC_Lich_Idle_Anim/PC_Lich_IdleAnim_0004.png" id="8_d22xn"]
@@ -200,14 +199,6 @@ position = Vector2(62, 0)
 collision_layer = 3
 collision_mask = 3
 player = NodePath("../..")
-
-[node name="TextureRect" type="TextureRect" parent="Pivot/Claws"]
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 112.0
-offset_bottom = 111.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_ondsp")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

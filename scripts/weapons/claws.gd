@@ -10,6 +10,7 @@ var kb_magnitude:= 80
 var bonus_damage_ready:= false
 var bonus_damage_value:= 40
 @export var bonus_timer: Timer
+@export var sprite: AnimatedSprite2D
 
 func _ready() -> void:
 	cooldown_timer = Timer.new()
@@ -20,6 +21,7 @@ func _ready() -> void:
 	cooldown_timer.start()
 
 func attack():
+	sprite.play()
 	for node in get_overlapping_bodies():
 		if(node.has_method("takeDamage")):
 			node.takeDamage(damage)
@@ -42,3 +44,6 @@ func _physics_process(delta: float) -> void:
 
 func ready_bonus():
 	bonus_damage_ready = true
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	sprite.frame = 0
