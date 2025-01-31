@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c20toi3qt52r3"
+path="res://.godot/imported/Doot of Death.ogg-b867c8e4e2ca761ead4bff92fa1447dd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sounds/Music/Doot of Death.ogg"
+dest_files=["res://.godot/imported/Doot of Death.ogg-b867c8e4e2ca761ead4bff92fa1447dd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

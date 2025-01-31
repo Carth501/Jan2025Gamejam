@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://ci4c8vmw8ks5m"]
+[gd_scene load_steps=7 format=4 uid="uid://ci4c8vmw8ks5m"]
 
 [ext_resource type="Script" path="res://scripts/level_.gd" id="1_t8deo"]
 [ext_resource type="PackedScene" uid="uid://y7jertm1cysn" path="res://scenes/player.tscn" id="2_a0ekh"]
 [ext_resource type="PackedScene" uid="uid://dxdbpa8w8wvgv" path="res://scenes/door.tscn" id="3_8mauk"]
 [ext_resource type="PackedScene" uid="uid://hijcaxy5t0yd" path="res://scenes/terrain.tscn" id="4_shg2l"]
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="5_1e53p"]
+[ext_resource type="AudioStream" uid="uid://c20toi3qt52r3" path="res://assets/Sounds/Music/Doot of Death.ogg" id="6_7gvu2"]
 
 [node name="Level_" type="Control" node_paths=PackedStringArray("player", "doors", "inventory_display", "room_danger_meter")]
 layout_mode = 3
@@ -15,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t8deo")
 player = NodePath("Player")
-doors = [NodePath(""), NodePath("EastDoor")]
+doors = [NodePath("EastDoor")]
 level_extent = Vector2(1176, 672)
 inventory_display = NodePath("Inventory")
 room_danger_meter = NodePath("RoomDangerMeter/ProgressBar")
@@ -80,6 +81,11 @@ offset_right = 1181.0
 offset_bottom = 384.0
 theme_override_font_sizes/font_size = 44
 text = "=>"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7gvu2")
+volume_db = -34.0
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]

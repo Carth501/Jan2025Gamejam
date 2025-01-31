@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://c41ykwfmm07ji"]
+[gd_scene load_steps=8 format=4 uid="uid://c41ykwfmm07ji"]
 
 [ext_resource type="Script" path="res://scripts/level_.gd" id="1_1kmk3"]
 [ext_resource type="PackedScene" uid="uid://y7jertm1cysn" path="res://scenes/player.tscn" id="2_admc0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hijcaxy5t0yd" path="res://scenes/terrain.tscn" id="4_skbpl"]
 [ext_resource type="PackedScene" uid="uid://41bvy6a6qp" path="res://scenes/phylactery.tscn" id="6_tr5h4"]
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="6_wnoto"]
+[ext_resource type="AudioStream" uid="uid://bt77l02nnwgke" path="res://assets/Sounds/Music/Necrophone Chill.ogg" id="7_ax21h"]
 
 [node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display", "upgrade_1", "upgrade_2")]
 layout_mode = 3
@@ -16,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1kmk3")
 player = NodePath("Player")
-doors = [NodePath("WestDoor"), NodePath("")]
+doors = [NodePath("WestDoor")]
 phil = NodePath("Phylactery")
 inventory_display = NodePath("Inventory")
 phil_inventory_display = NodePath("PhilInventory")
@@ -97,6 +98,11 @@ offset_right = 137.0
 offset_bottom = 400.0
 theme_override_font_sizes/font_size = 53
 text = "<="
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ax21h")
+volume_db = -34.0
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]

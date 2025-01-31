@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bt77l02nnwgke"
+path="res://.godot/imported/Necrophone Chill.ogg-8dc9d55dc8790b81ae261437d472b361.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sounds/Music/Necrophone Chill.ogg"
+dest_files=["res://.godot/imported/Necrophone Chill.ogg-8dc9d55dc8790b81ae261437d472b361.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
