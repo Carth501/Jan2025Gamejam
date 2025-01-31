@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dukpldyxg3v66"]
+[gd_scene load_steps=14 format=3 uid="uid://dukpldyxg3v66"]
 
 [ext_resource type="Script" path="res://scripts/weapons/claws.gd" id="1_ayov1"]
 [ext_resource type="Texture2D" uid="uid://bk6ivu7vixjk2" path="res://assets/Player/PC_Lich_ClawAtt/PC_Lich_ClawSide/PC_Lich_SideClawAtt_0001.png" id="3_04eaj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dvq1nmrulcpx1" path="res://assets/Player/PC_Lich_ClawAtt/PC_Lich_ClawSide/PC_Lich_SideClawAtt_0006.png" id="8_6misx"]
 [ext_resource type="Texture2D" uid="uid://xgb67asqj7fd" path="res://assets/Player/PC_Lich_ClawAtt/PC_Lich_ClawSide/PC_Lich_SideClawAtt_0007.png" id="9_2n365"]
 [ext_resource type="Texture2D" uid="uid://c0t7rj2vsig3r" path="res://assets/Player/PC_Lich_ClawAtt/PC_Lich_ClawSide/PC_Lich_SideClawAtt_0008.png" id="10_bc6vh"]
+[ext_resource type="AudioStream" uid="uid://dyf4oroejp3nk" path="res://assets/Sounds/Effects/Claw SFX.mp3" id="11_7poay"]
 [ext_resource type="Texture2D" uid="uid://bfnqqwjktv8dy" path="res://assets/Player/PC_Lich_ClawAtt/PC_Lich_ClawSide/PC_Lich_SideClawAtt_0009.png" id="11_v3asd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uq24"]
@@ -49,11 +50,12 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Claws" type="Area2D" node_paths=PackedStringArray("shape", "bonus_timer", "sprite")]
+[node name="Claws" type="Area2D" node_paths=PackedStringArray("shape", "bonus_timer", "sprite", "sound_effect")]
 script = ExtResource("1_ayov1")
 shape = NodePath("CollisionShape2D")
 bonus_timer = NodePath("Timer")
 sprite = NodePath("AnimatedSprite2D")
+sound_effect = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2uq24")
@@ -68,6 +70,10 @@ scale = Vector2(0.04, 0.04)
 sprite_frames = SubResource("SpriteFrames_xj1go")
 frame = 8
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_7poay")
+volume_db = -54.0
 
 [connection signal="timeout" from="Timer" to="." method="ready_bonus"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

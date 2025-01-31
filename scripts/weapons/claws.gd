@@ -11,6 +11,7 @@ var bonus_damage_ready:= false
 var bonus_damage_value:= 40
 @export var bonus_timer: Timer
 @export var sprite: AnimatedSprite2D
+@export var sound_effect: AudioStreamPlayer2D
 
 func _ready() -> void:
 	cooldown_timer = Timer.new()
@@ -22,6 +23,7 @@ func _ready() -> void:
 
 func attack():
 	sprite.play()
+	sound_effect.play()
 	for node in get_overlapping_bodies():
 		if(node.has_method("takeDamage")):
 			node.takeDamage(damage)
