@@ -6,7 +6,7 @@ class_name MainMenu extends Control
 
 @onready var margin_container = $MarginContainer as MarginContainer
 
-#@onready var main_scene = preload("") as PackedScene
+@onready var main_scene = preload("res://scenes/rooms/phylactery_room.tscn") as PackedScene
 
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_start_button_pressed() -> void:
 	Global.debug(0,"Start the game.")
-	#get_tree().change_scene_to_packed()
+	get_tree().change_scene_to_packed(main_scene)
 	
 
 func _on_options_button_pressed() -> void:
