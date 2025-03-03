@@ -21,8 +21,6 @@ func _ready() -> void:
 	# if we aren't transition between levels, we don't need to wait for the SceneManager to call this
 	if data == null:
 		enter_level()
-	if(phil != null):
-		player
 
 func enter_level() -> void:
 	if data != null:
@@ -104,12 +102,12 @@ func increment():
 		room_danger_meter.value = roundi((seconds * 0.8) / 1.8) + 20
 
 func calculate_current_max_enemies() -> int:
-	return (seconds / 3.0) + 20
+	return floori((seconds / 3.0) + 20)
 
 func calculate_enemies_to_be_created() -> int:
 	var current_count = active_enemies.size()
 	var target_count = calculate_current_max_enemies()
-	var difference = ceili(( target_count - current_count ) / 4)
+	var difference = ceili(( target_count - current_count ) / 4.0)
 	return difference
 
 func deactivate(enemy: Enemy):

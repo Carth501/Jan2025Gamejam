@@ -28,11 +28,11 @@ func get_input():
 	else:
 		sprite.animation = "idle"
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	healthbar.value = stats.current_health/stats.max_health*100.0
 
 func pickup_item(object):
