@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_vew63"]
 [ext_resource type="FontFile" uid="uid://h8l3i8n4p08t" path="res://assets/fonts/Consolas.ttf" id="2_rssli"]
-[ext_resource type="PackedScene" uid="uid://dtbgnqbbkn8qe" path="res://scenes/menus/button.tscn" id="3_de2vb"]
+[ext_resource type="PackedScene" path="res://scenes/menus/button.tscn" id="3_de2vb"]
 [ext_resource type="PackedScene" uid="uid://ch5lyn0fbqmtt" path="res://scenes/menus/options_menu.tscn" id="4_v5ia6"]
 
 [sub_resource type="Gradient" id="Gradient_sclph"]
@@ -80,21 +80,21 @@ layout_mode = 2
 
 [node name="StartButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../Quit Button")
+focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 focus_next = NodePath("../OptionsButton")
-focus_previous = NodePath("../Quit Button")
+focus_previous = NodePath("../QuitButton")
 text = "Start"
 
 [node name="OptionsButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
-focus_neighbor_bottom = NodePath("../Quit Button")
-focus_next = NodePath("../Quit Button")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../StartButton")
 text = "Options"
 
-[node name="Quit Button" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
+[node name="QuitButton" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_de2vb")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsButton")
 focus_neighbor_bottom = NodePath("../StartButton")
@@ -108,4 +108,4 @@ layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
