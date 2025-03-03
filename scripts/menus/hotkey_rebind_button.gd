@@ -63,7 +63,6 @@ func get_mouse_button_keycode(button_index: int) -> String:
 			return "MMB"
 		_:
 			return "MB " + str(button_index)
-	pass
 
 func button_assignment(action_event: InputEvent, action_keycode: String) -> void:
 	Global.debug(0, "Attempting to assign action: %s to keycode: %s" % [action_name,action_keycode])

@@ -10,7 +10,7 @@ var current_health: float = 10.0
 @export var max_mana: float = 5.0
 var current_mana: float = 5.0
 @export var attack: int = 1
-@export var range: float = 50.0
+@export var reach: float = 50.0
 @export var defense: int = 1
 @export var speed:= 60.0
 @export var kb_coeff:= 1.0
@@ -43,15 +43,15 @@ func set_level(value: int):
 	max_mana = 5.0
 	current_mana = 5.0
 	attack = 1
-	range = 50.0
+	reach = 50.0
 	defense = 1
 	speed = 60.0
 	kb_coeff = 1.0
 	kb_duration = 0.25
-	max_health += 6 * pow(value/60, 2) 
-	attack += floori(value/60)
-	defense += floori(value/60)
-	speed += value / 2
+	max_health += 6 * pow(value/60.0, 2) 
+	attack += floori(value/60.0)
+	defense += floori(value/60.0)
+	speed += value / 2.0
 
 func set_player(new_player: Player):
 	player = new_player
@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 			apply_central_force(velocity_dif * 1000 * delta)
 		else:
 			apply_central_force(velocity_dif * 100 * delta)
-		if(attack_ready && (vector_to.length() < range)):
+		if(attack_ready && (vector_to.length() < reach)):
 			player.stats.takeDamage(attack)
 			attack_ready = false
 			cooldown_timer.start()

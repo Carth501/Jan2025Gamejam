@@ -37,7 +37,7 @@ func load_map(target_map: Dictionary):
 
 func change_room(exit: Vector2, transition_type):
 	print(str(exit))
-	var destination_id = get_room_id(x + exit.x, y + exit.y)
+	var destination_id = get_room_id(x + floori(exit.x), floori(y + exit.y))
 	print(destination_id)
 	if(destination_id != 'invalid'):
 		if transition_type == "zelda":
