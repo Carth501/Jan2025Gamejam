@@ -7,25 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="5_1e53p"]
 [ext_resource type="AudioStream" uid="uid://c20toi3qt52r3" path="res://assets/Sounds/Music/Doot of Death.ogg" id="6_7gvu2"]
 
-[node name="Level_" type="Control" node_paths=PackedStringArray("player", "doors", "inventory_display", "room_danger_meter")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Level_" type="Node" node_paths=PackedStringArray("player", "doors", "inventory_display", "room_danger_meter")]
 script = ExtResource("1_t8deo")
 player = NodePath("Player")
 doors = [NodePath("EastDoor")]
 level_extent = Vector2(1176, 672)
-inventory_display = NodePath("Inventory")
-room_danger_meter = NodePath("RoomDangerMeter/ProgressBar")
+inventory_display = NodePath("CanvasLayer/Inventory")
+room_danger_meter = NodePath("CanvasLayer/RoomDangerMeter/ProgressBar")
 
 [node name="Player" parent="." instance=ExtResource("2_a0ekh")]
 position = Vector2(481, 272)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="EastDoor" parent="." instance=ExtResource("3_8mauk")]
 position = Vector2(1192, 349)
@@ -45,36 +38,7 @@ tile_map_data = PackedByteArray("AAARAP//AwABAAIAAAARAP7/AwABAAAAAAAQAP//AwABAAE
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Inventory" parent="." instance=ExtResource("5_1e53p")]
-layout_mode = 0
-
-[node name="RoomDangerMeter" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 51.0
-grow_horizontal = 0
-
-[node name="Label" type="Label" parent="RoomDangerMeter"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 23.0
-text = "Enemy Danger"
-horizontal_alignment = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="RoomDangerMeter"]
-layout_mode = 0
-offset_top = 24.0
-offset_right = 200.0
-offset_bottom = 51.0
-step = 1.0
-value = 100.0
-allow_greater = true
-
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
 offset_left = 1131.0
 offset_top = 323.0
 offset_right = 1181.0
@@ -86,6 +50,43 @@ text = "=>"
 stream = ExtResource("6_7gvu2")
 volume_db = -34.0
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_1e53p")]
+anchors_preset = -1
+offset_left = 8.0
+offset_top = 8.0
+
+[node name="RoomDangerMeter" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(216, 56)
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 56.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/RoomDangerMeter"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 2.0
+offset_right = 209.0
+offset_bottom = 25.0
+text = "Enemy Danger"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/RoomDangerMeter"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 26.0
+offset_right = 209.0
+offset_bottom = 53.0
+step = 1.0
+value = 100.0
+allow_greater = true
 
 [connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]

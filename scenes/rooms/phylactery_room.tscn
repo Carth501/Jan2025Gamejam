@@ -8,28 +8,27 @@
 [ext_resource type="PackedScene" uid="uid://bel8mopyxoc7h" path="res://scenes/menus/inventory_panel.tscn" id="6_wnoto"]
 [ext_resource type="AudioStream" uid="uid://bt77l02nnwgke" path="res://assets/Sounds/Music/Necrophone Chill.ogg" id="7_ax21h"]
 
-[node name="phylactery_room" type="Control" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display", "upgrade_1", "upgrade_2")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="phylactery_room" type="Node" node_paths=PackedStringArray("player", "doors", "phil", "inventory_display", "phil_inventory_display", "upgrade_1", "upgrade_2")]
 script = ExtResource("1_1kmk3")
 player = NodePath("Player")
 doors = [NodePath("WestDoor")]
 phil = NodePath("Phylactery")
-inventory_display = NodePath("Inventory")
-phil_inventory_display = NodePath("PhilInventory")
+inventory_display = NodePath("CanvasLayer/Inventory")
+phil_inventory_display = NodePath("CanvasLayer/PhilInventory")
 enemies = false
-upgrade_1 = NodePath("CraftingPanel/VBoxContainer/Upgrade1")
-upgrade_2 = NodePath("CraftingPanel/VBoxContainer/Upgrade2")
+upgrade_1 = NodePath("CanvasLayer/CraftingPanel/VBoxContainer/Upgrade1")
+upgrade_2 = NodePath("CanvasLayer/CraftingPanel/VBoxContainer/Upgrade2")
 
 [node name="Player" parent="." instance=ExtResource("2_admc0")]
 position = Vector2(481, 272)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="UI" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="WestDoor" parent="." instance=ExtResource("3_ne0nw")]
 position = Vector2(88, 354)
@@ -52,46 +51,7 @@ autostart = true
 [node name="Phylactery" parent="." instance=ExtResource("6_tr5h4")]
 position = Vector2(248, 312)
 
-[node name="Inventory" parent="." instance=ExtResource("6_wnoto")]
-layout_mode = 0
-
-[node name="PhilInventory" parent="." instance=ExtResource("6_wnoto")]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -120.0
-offset_right = 0.0
-grow_horizontal = 0
-
-[node name="CraftingPanel" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CraftingPanel"]
-layout_mode = 2
-
-[node name="Upgrade1" type="Button" parent="CraftingPanel/VBoxContainer"]
-layout_mode = 2
-tooltip_text = "20x Blood"
-text = "Claws: Increase size on kill, stacking diminishingly."
-
-[node name="Upgrade2" type="Button" parent="CraftingPanel/VBoxContainer"]
-layout_mode = 2
-tooltip_text = "30x Blood"
-text = "Claws: Bonus damage after 2 seconds without dealing damage."
-
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
 offset_left = 76.0
 offset_top = 327.0
 offset_right = 137.0
@@ -104,7 +64,49 @@ stream = ExtResource("7_ax21h")
 volume_db = -34.0
 autoplay = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_wnoto")]
+anchors_preset = -1
+offset_left = 8.0
+offset_top = 8.0
+
+[node name="PhilInventory" parent="CanvasLayer" instance=ExtResource("6_wnoto")]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_right = 0.0
+grow_horizontal = 0
+
+[node name="CraftingPanel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -494.0
+offset_top = -66.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CraftingPanel"]
+layout_mode = 2
+
+[node name="Upgrade1" type="Button" parent="CanvasLayer/CraftingPanel/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "20x Blood"
+text = "Claws: Increase size on kill, stacking diminishingly."
+
+[node name="Upgrade2" type="Button" parent="CanvasLayer/CraftingPanel/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "30x Blood"
+text = "Claws: Bonus damage after 2 seconds without dealing damage."
+
 [connection signal="timeout" from="Timer" to="." method="increment"]
 [connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
-[connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade1" to="." method="purchase_upgrade_1"]
-[connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade2" to="." method="purchase_upgrade_2"]
+[connection signal="pressed" from="CanvasLayer/CraftingPanel/VBoxContainer/Upgrade1" to="." method="purchase_upgrade_1"]
+[connection signal="pressed" from="CanvasLayer/CraftingPanel/VBoxContainer/Upgrade2" to="." method="purchase_upgrade_2"]
