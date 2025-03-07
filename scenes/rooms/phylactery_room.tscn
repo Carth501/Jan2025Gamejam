@@ -104,7 +104,7 @@ stream = ExtResource("7_ax21h")
 volume_db = -34.0
 autoplay = true
 
-[connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="timeout" from="Timer" to="." method="increment"]
+[connection signal="timeout" from="Timer" to="." method="spawn_enemies"]
 [connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade1" to="." method="purchase_upgrade_1"]
 [connection signal="pressed" from="CraftingPanel/VBoxContainer/Upgrade2" to="." method="purchase_upgrade_2"]

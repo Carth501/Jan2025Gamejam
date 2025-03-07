@@ -49,3 +49,7 @@ func ready_bonus():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	sprite.frame = 0
+
+func flip_sprite(vertically: bool, horizontally: bool):
+	sprite.flip_v = vertically
+	sprite.flip_h = horizontally

@@ -23,8 +23,12 @@ func get_input():
 		sprite.animation = "walk"
 		if(input_direction.x > 0):
 			sprite.set_flip_h(false)
+			if(weapon != null && weapon.has_method("flip_sprite")):
+				weapon.flip_sprite(false, false)
 		elif(input_direction.x < 0):
 			sprite.set_flip_h(true)
+			if(weapon != null && weapon.has_method("flip_sprite")):
+				weapon.flip_sprite(true, false)
 	else:
 		sprite.animation = "idle"
 
